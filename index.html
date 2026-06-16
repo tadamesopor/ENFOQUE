@@ -1,397 +1,630 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Damian Mattheeuw - ENFOQUE</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="js/tailwind.config.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
-<link href="css/styles.css" rel="stylesheet"/>
-</head>
-<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative">
-<canvas id="shader-bg"></canvas>
-<div class="film-grain"></div>
-<div class="custom-cursor" id="custom-cursor"></div>
-<div class="fixed inset-0 scanline z-50 mix-blend-overlay opacity-30"></div>
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-40 bg-transparent flex justify-between items-center px-margin-mobile md:px-margin-desktop py-8 transition-opacity duration-500 ease-in-out">
-<div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter uppercase warp-element">
-            ENFOQUE
-        </div>
-<nav class="hidden md:flex gap-gutter font-label-mono-sm text-label-mono-sm uppercase tracking-widest">
-<a class="nav-link text-primary-fixed-dim hover:text-primary-fixed duration-300 transition-all hover:glow-primary active interactive-el" href="#work">WORK</a>
-<a class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el" href="#about">ABOUT</a>
-<a class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el" href="#contact">CONTACT</a>
-</nav>
-<div class="font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-widest">
-            [ONLINE]
-        </div>
-</header>
-<!-- ScrollSmoother wrapper (fixed overlays/header stay outside this) -->
-<div id="smooth-wrapper">
-<div id="smooth-content">
-<main class="flex-grow">
-<!-- Hero Section (editorial layout: big name + image, metadata bar) -->
-<section class="hero relative min-h-screen flex flex-col px-margin-mobile md:px-margin-desktop pt-32 pb-10" data-hero-trail>
-<div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-<!-- Left: short description + giant stacked name -->
-<div class="md:col-span-7 relative z-10">
-<p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">Building digital experiences and capturing the world through a lens. Front-end developer and photographer.</p>
-<h1 class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[16vw] md:text-[11vw] interactive-el">
-<span class="block" data-split>DAMIAN</span>
-<span class="block" data-split>MATTHEEUW</span>
-</h1>
-</div>
-<!-- Right: portrait image -->
-<div class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm">
-<img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/people1.jpg"/>
-</div>
-</div>
-<!-- Bottom metadata bar -->
-<div class="relative z-10 flex justify-between items-center border-t technical-line pt-4 mt-6 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">
-<span>ANTWERP, BE</span>
-<span id="hero-date">&mdash;</span>
-<span id="hero-time">--:--</span>
-</div>
-</section>
-<!-- Work Section -->
-<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="work">
-<!-- Radial Glow -->
-<div class="radial-glow w-[600px] h-[600px] top-0 left-0 -translate-x-1/4 -translate-y-1/4 opacity-30" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
-<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SELECTED WORK</h2>
-<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[01/04]</span>
-</div>
-<div class="grid grid-cols-1 gap-16 mb-16">
-<!-- Project 1: Owen Bryce -->
-<a class="group block project-card interactive-el" href="owen-bryce.html">
-<div class="relative w-full aspect-[21/9] overflow-hidden rounded-xl bg-surface-container mb-6" data-warp="both">
-<img alt="Owen Bryce website ." class="w-full h-full object-cover" src="assets/img/owen1.1.png"/>
-</div>
-<div class="project-info flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-<div>
-<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
-<span>[01/03]</span>
-<span>Website</span>
-</div>
-<div class="font-headline-lg text-4xl text-primary uppercase group-hover:glow-primary transition-all">
-                            OWEN BRYCE
-                        </div>
-</div>
-<div class="flex flex-col items-start md:items-end w-full md:w-1/3">
-<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mb-4 md:text-right">
-                            <!-- TODO: real one-line description --> PERSONAL WEBSITE BUILD.
-                        </div>
-<div class="flex items-center gap-2">
-<div class="h-px bg-primary hover-line"></div>
-<span class="material-symbols-outlined text-primary hover-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-</a>
-<!-- Project 2 & 3 in a row -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<!-- Project 2: Owow Dashboard -->
-<a class="group block project-card interactive-el" href="owow-dashboard.html">
-<div class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6" data-warp="left">
-<img alt="Owow Dashboard project (placeholder image)." class="w-full h-full object-cover" src="assets/img/owow-dash1.gif"/>
-</div>
-<div class="project-info flex flex-col justify-between items-start gap-4">
-<div class="w-full">
-<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
-<span>[02/03]</span>
-<span>Dashboard</span>
-</div>
-<div class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full">
-<span>OWOW</span>
-<span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
-</div>
-</div>
-</div>
-</a>
-<!-- Project 3: Serieus?! Virtual Production -->
-<a class="group block project-card interactive-el" href="serieus.html">
-<div class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6" data-warp="right">
-<img alt="Serieus?! virtual production project (placeholder image)." class="w-full h-full object-cover" src="assets/img/zandloper1.gif"/>
-</div>
-<div class="project-info flex flex-col justify-between items-start gap-4">
-<div class="w-full">
-<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
-<span>[03/03]</span>
-<span>Virtual Production</span>
-</div>
-<div class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full">
-<span>SERIEUS?!</span>
-<span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-</section>
-<!-- About Section. Big editorial statement on the left, a second patch of
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Damian Mattheeuw - ENFOQUE</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind.config.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative">
+    <canvas id="shader-bg"></canvas>
+    <div class="film-grain"></div>
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="fixed inset-0 scanline z-50 mix-blend-overlay opacity-30"></div>
+    <!-- TopAppBar -->
+    <header
+      class="fixed top-0 w-full z-40 bg-transparent flex justify-between items-center px-margin-mobile md:px-margin-desktop py-8 transition-opacity duration-500 ease-in-out"
+    >
+      <div
+        class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter uppercase warp-element"
+      >
+        ENFOQUE
+      </div>
+      <nav class="hidden md:flex gap-gutter font-label-mono-sm text-label-mono-sm uppercase tracking-widest">
+        <a
+          class="nav-link text-primary-fixed-dim hover:text-primary-fixed duration-300 transition-all hover:glow-primary active interactive-el"
+          href="#work"
+          >WORK</a
+        >
+        <a
+          class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el"
+          href="#about"
+          >ABOUT</a
+        >
+        <a
+          class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el"
+          href="#contact"
+          >CONTACT</a
+        >
+      </nav>
+      <div class="font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-widest">[ONLINE]</div>
+    </header>
+    <!-- ScrollSmoother wrapper (fixed overlays/header stay outside this) -->
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <main class="flex-grow">
+          <!-- Hero Section (editorial layout: big name + image, metadata bar) -->
+          <section
+            class="hero relative min-h-screen flex flex-col px-margin-mobile md:px-margin-desktop pt-32 pb-10"
+            data-hero-trail
+          >
+            <div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+              <!-- Left: short description + giant stacked name -->
+              <div class="md:col-span-7 relative z-10">
+                <p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">
+                  Building digital experiences and capturing the world through a lens. Front-end developer and
+                  photographer.
+                </p>
+                <h1
+                  class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[16vw] md:text-[11vw] interactive-el"
+                >
+                  <span class="block" data-split>DAMIAN</span>
+                  <span class="block" data-split>MATTHEEUW</span>
+                </h1>
+              </div>
+              <!-- Right: portrait image -->
+              <div class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm">
+                <img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/people1.jpg" />
+              </div>
+            </div>
+            <!-- Bottom metadata bar -->
+            <div
+              class="relative z-10 flex justify-between items-center border-t technical-line pt-4 mt-6 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest"
+            >
+              <span>ANTWERP, BE</span>
+              <span id="hero-date">&mdash;</span>
+              <span id="hero-time">--:--</span>
+            </div>
+          </section>
+          <!-- Work Section -->
+          <section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="work">
+            <!-- Radial Glow -->
+            <div
+              class="radial-glow w-[600px] h-[600px] top-0 left-0 -translate-x-1/4 -translate-y-1/4 opacity-30"
+              style="
+                background: radial-gradient(
+                  circle,
+                  rgba(255, 255, 255, 0.1) 0%,
+                  rgba(100, 150, 255, 0.05) 40%,
+                  transparent 70%
+                );
+              "
+            ></div>
+            <div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
+              <h2
+                class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element"
+              >
+                SELECTED WORK
+              </h2>
+              <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[01/04]</span>
+            </div>
+            <div class="grid grid-cols-1 gap-16 mb-16">
+              <!-- Project 1: Owen Bryce -->
+              <a class="group block project-card interactive-el" href="owen-bryce.html">
+                <div
+                  class="relative w-full aspect-[21/9] overflow-hidden rounded-xl bg-surface-container mb-6"
+                  data-warp="both"
+                >
+                  <img alt="Owen Bryce website ." class="w-full h-full object-cover" src="assets/img/owen1.1.png" />
+                </div>
+                <div class="project-info flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                  <div>
+                    <div
+                      class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase"
+                    >
+                      <span>[01/03]</span>
+                      <span>Website</span>
+                    </div>
+                    <div
+                      class="font-headline-lg text-4xl text-primary uppercase group-hover:glow-primary transition-all"
+                    >
+                      OWEN BRYCE
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-start md:items-end w-full md:w-1/3">
+                    <div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mb-4 md:text-right">
+                      <!-- TODO: real one-line description -->
+                      PERSONAL WEBSITE BUILD.
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <div class="h-px bg-primary hover-line"></div>
+                      <span class="material-symbols-outlined text-primary hover-arrow">arrow_forward</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <!-- Project 2 & 3 in a row -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 2: Owow Dashboard -->
+                <a class="group block project-card interactive-el" href="owow-dashboard.html">
+                  <div
+                    class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6"
+                    data-warp="left"
+                  >
+                    <img
+                      alt="Owow Dashboard project (placeholder image)."
+                      class="w-full h-full object-cover"
+                      src="assets/img/owow-dash1.gif"
+                    />
+                  </div>
+                  <div class="project-info flex flex-col justify-between items-start gap-4">
+                    <div class="w-full">
+                      <div
+                        class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase"
+                      >
+                        <span>[02/03]</span>
+                        <span>Dashboard</span>
+                      </div>
+                      <div
+                        class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full"
+                      >
+                        <span>OWOW</span>
+                        <span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <!-- Project 3: Serieus?! Virtual Production -->
+                <a class="group block project-card interactive-el" href="serieus.html">
+                  <div
+                    class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6"
+                    data-warp="right"
+                  >
+                    <img
+                      alt="Serieus?! virtual production project (placeholder image)."
+                      class="w-full h-full object-cover"
+                      src="assets/img/zandloper1.gif"
+                    />
+                  </div>
+                  <div class="project-info flex flex-col justify-between items-start gap-4">
+                    <div class="w-full">
+                      <div
+                        class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase"
+                      >
+                        <span>[03/03]</span>
+                        <span>Virtual Production</span>
+                      </div>
+                      <div
+                        class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full"
+                      >
+                        <span>SERIEUS?!</span>
+                        <span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </section>
+          <!-- About Section. Big editorial statement on the left, a second patch of
      text on the right, and an image that travels the diagonal "grey path"
      from top-right to bottom-left as you scroll (pinned, desktop only). -->
-<section class="relative" id="about">
-<div class="about-scene relative" data-about-scene>
-<div class="about-stage relative md:h-screen md:overflow-hidden px-margin-mobile md:px-margin-desktop py-24 md:py-0 flex flex-col gap-12 md:block" data-about-stage>
-<!-- HUD label -->
-<div class="md:absolute md:top-10 md:left-margin-desktop md:right-margin-desktop flex justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-widest">
-<span>[02/04]</span>
-<span>ABOUT</span>
-</div>
-<!-- Big statement (left) -->
-<h2 class="about-statement md:absolute md:left-margin-desktop md:top-1/2 md:-translate-y-1/2 md:max-w-[52%] font-display-xl text-primary uppercase font-bold tracking-tight text-[9vw] md:text-[5vw] leading-[0.95]">Front-end developer &amp; photographer based in Antwerp.</h2>
-<!-- Secondary text patch (right) -->
-<div class="md:absolute md:right-margin-desktop md:bottom-[14%] md:max-w-xs font-body-md text-base md:text-lg text-on-surface-variant leading-relaxed">
-<p>Studying at Fontys University of Applied Sciences, I build structural frameworks and capture the world within them.</p>
-<div class="flex flex-col gap-2 mt-6 font-label-mono-sm text-label-mono-sm uppercase tracking-widest text-on-surface">
-<span>// FRONT-END DEVELOPER</span>
-<span>// PHOTOGRAPHER</span>
-</div>
-</div>
-<!-- Image following the diagonal path -->
-<img alt="Damian at work" class="about-path-img" data-about-path src="assets/img/people2.jpg"/>
-</div>
-</div>
-</section>
-<!-- Skills Section -->
-<section class="relative py-section-gap overflow-hidden" id="skills">
-<!-- Full-bleed auto-scrolling marquee. It loops continuously and flips
+          <section class="relative" id="about">
+            <div class="about-scene relative" data-about-scene>
+              <div
+                class="about-stage relative md:h-screen md:overflow-hidden px-margin-mobile md:px-margin-desktop py-24 md:py-0 flex flex-col gap-12 md:block"
+                data-about-stage
+              >
+                <!-- HUD label -->
+                <div
+                  class="md:absolute md:top-10 md:left-margin-desktop md:right-margin-desktop flex justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-widest"
+                >
+                  <span>[02/04]</span>
+                  <span>ABOUT</span>
+                </div>
+                <!-- Big statement (left) -->
+                <h2
+                  class="about-statement md:absolute md:left-margin-desktop md:top-1/2 md:-translate-y-1/2 md:max-w-[52%] font-display-xl text-primary uppercase font-bold tracking-tight text-[9vw] md:text-[5vw] leading-[0.95]"
+                >
+                  Front-end developer &amp; photographer based in Antwerp.
+                </h2>
+                <!-- Secondary text patch (right) -->
+                <div
+                  class="md:absolute md:right-margin-desktop md:bottom-[14%] md:max-w-xs font-body-md text-base md:text-lg text-on-surface-variant leading-relaxed"
+                >
+                  <p>
+                    Studying at Fontys University of Applied Sciences, I build structural frameworks and capture the
+                    world within them.
+                  </p>
+                  <div
+                    class="flex flex-col gap-2 mt-6 font-label-mono-sm text-label-mono-sm uppercase tracking-widest text-on-surface"
+                  >
+                    <span>// FRONT-END DEVELOPER</span>
+                    <span>// PHOTOGRAPHER</span>
+                  </div>
+                </div>
+                <!-- Image following the diagonal path -->
+                <img alt="Damian at work" class="about-path-img" data-about-path src="assets/img/people2.jpg" />
+              </div>
+            </div>
+          </section>
+          <!-- Skills Section -->
+          <section class="relative py-section-gap overflow-hidden" id="skills">
+            <!-- Full-bleed auto-scrolling marquee. It loops continuously and flips
      direction with the scroll direction (handled in js/scripts.js). -->
-<div class="skills-marquee border-y technical-line py-4 mb-16" aria-hidden="true">
-<div class="skills-marquee__track font-display-xl text-primary uppercase tracking-tight text-[12vw] leading-none">
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
-</div>
-</div>
-<div class="px-margin-mobile md:px-margin-desktop">
-<div class="flex justify-between items-center mb-12">
-<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">These are my most significant skills</p>
-<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[03/04]</span>
-</div>
-<!-- Skill cards. Each has a hidden dark "reveal" layer that grows from the
+            <div class="skills-marquee border-y technical-line py-4 mb-16" aria-hidden="true">
+              <div
+                class="skills-marquee__track font-display-xl text-primary uppercase tracking-tight text-[12vw] leading-none"
+              >
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+                <span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+              </div>
+            </div>
+            <div class="px-margin-mobile md:px-margin-desktop">
+              <div class="flex justify-between items-center mb-12">
+                <p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">
+                  These are my most significant skills
+                </p>
+                <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[03/04]</span>
+              </div>
+              <!-- Skill cards. Each has a hidden dark "reveal" layer that grows from the
      cursor entry point as an expanding circle (see .skill-card in styles.css). -->
-<div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">REACT / NEXT.JS</h3>
-<p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">REACT / NEXT.JS</h3>
-<p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">GSAP</h3>
-<p class="skill-card__desc">Creating high-performance animations and scroll-triggered interactions</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">GSAP</h3>
-<p class="skill-card__desc">Creating high-performance animations and scroll-triggered interactions</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">THREE.JS / WEBGL</h3>
-<p class="skill-card__desc">3D graphics and immersive web experiences</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">THREE.JS / WEBGL</h3>
-<p class="skill-card__desc">3D graphics and immersive web experiences</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">FIGMA</h3>
-<p class="skill-card__desc">UI design, prototyping, and design systems</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">FIGMA</h3>
-<p class="skill-card__desc">UI design, prototyping, and design systems</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">PHOTOGRAPHY</h3>
-<p class="skill-card__desc">Visual direction and image capture</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">PHOTOGRAPHY</h3>
-<p class="skill-card__desc">Visual direction and image capture</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">TAILWIND CSS</h3>
-<p class="skill-card__desc">Utility-first styling and rapid layout building</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">TAILWIND CSS</h3>
-<p class="skill-card__desc">Utility-first styling and rapid layout building</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">TYPESCRIPT</h3>
-<p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">TYPESCRIPT</h3>
-<p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-<article class="skill-card interactive-el">
-<div class="skill-card__face">
-<h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
-<p class="skill-card__desc">Photo editing and color grading</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-<div class="skill-card__reveal" aria-hidden="true">
-<h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
-<p class="skill-card__desc">Photo editing and color grading</p>
-<span class="skill-card__mark">&mdash;</span>
-</div>
-</article>
-</div>
-</div>
-</section>
-<!-- Off-work: pinned horizontal-scroll gallery. The pin container is held
+              <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">REACT / NEXT.JS</h3>
+                    <p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">REACT / NEXT.JS</h3>
+                    <p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">GSAP</h3>
+                    <p class="skill-card__desc">
+                      Creating high-performance animations and scroll-triggered interactions
+                    </p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">GSAP</h3>
+                    <p class="skill-card__desc">
+                      Creating high-performance animations and scroll-triggered interactions
+                    </p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">THREE.JS / WEBGL</h3>
+                    <p class="skill-card__desc">3D graphics and immersive web experiences</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">THREE.JS / WEBGL</h3>
+                    <p class="skill-card__desc">3D graphics and immersive web experiences</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">FIGMA</h3>
+                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">FIGMA</h3>
+                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">PHOTOGRAPHY</h3>
+                    <p class="skill-card__desc">Visual direction and image capture</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">PHOTOGRAPHY</h3>
+                    <p class="skill-card__desc">Visual direction and image capture</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">TAILWIND CSS</h3>
+                    <p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">TAILWIND CSS</h3>
+                    <p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">TYPESCRIPT</h3>
+                    <p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">TYPESCRIPT</h3>
+                    <p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
+                    <p class="skill-card__desc">Photo editing and color grading</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
+                    <p class="skill-card__desc">Photo editing and color grading</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+          <!-- Off-work: pinned horizontal-scroll gallery. The pin container is held
      in place by GSAP ScrollTrigger while the track pans left (js/scripts.js).
      Falls back to a vertical stack on mobile (see .offwork in styles.css). -->
-<section class="offwork relative" id="offwork">
-<div class="offwork__pin flex h-screen overflow-hidden" data-offwork-pin>
-<div class="offwork__left w-[28vw] shrink-0 flex flex-col justify-between px-margin-mobile md:px-margin-desktop py-20 border-r technical-line">
-<h2 class="offwork__title font-display-xl text-primary uppercase">ENFOQUE<br/>[OFF-WORK]</h2>
-<div class="flex flex-col gap-4">
-<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">A personal archive &mdash; cats, objects, people. Scroll to pan across.</p>
-<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[04/04]</span>
-</div>
-</div>
-<div class="offwork__track flex h-full" data-offwork-track>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 01" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat1.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[01]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 02" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat1.2.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[02]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 03" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat3.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[03]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 04" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat3.2.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[04]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 05" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat5.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[05]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 06" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat6.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[06]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 07" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat7.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[07]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="cats">
-<img alt="cats shoot 08" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat-old.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[08]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="objects">
-<img alt="objects shoot 09" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object1.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[09]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="objects">
-<img alt="objects shoot 10" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object2.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[10]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="objects">
-<img alt="objects shoot 11" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object3.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[11]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="objects">
-<img alt="objects shoot 12" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object4.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[12]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="objects">
-<img alt="objects shoot 13" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object5.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[13]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="people">
-<img alt="people shoot 14" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people1.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[14]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="people">
-<img alt="people shoot 15" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people2.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[15]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="people">
-<img alt="people shoot 16" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people3.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[16]</figcaption>
-</figure>
-<figure class="offwork__item" data-category="people">
-<img alt="people shoot 17" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people4.jpg"/>
-<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[17]</figcaption>
-</figure>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="relative w-full overflow-hidden bg-transparent px-margin-mobile md:px-margin-desktop py-32 border-t border-outline-variant border-dashed transition-all duration-300" id="contact">
-<div class="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden select-none pointer-events-none">
-<div class="font-display-xl text-display-xl text-surface-variant opacity-10 whitespace-nowrap text-[20vw]" data-speed="0.8">
-            GET IN TOUCH
-        </div>
-</div>
-<div class="flex flex-col md:flex-row justify-between items-start gap-16 relative z-10">
-<div class="flex flex-col gap-8 w-full">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase sr-only">GET IN TOUCH</h2>
-<div class="flex flex-col gap-4 font-headline-lg text-4xl md:text-7xl text-on-surface uppercase tracking-tight w-full">
-<a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit rgb-split-hover interactive-el" data-text="HELLO@ENFOQUE.COM" href="mailto:hello@enfoque.com">HELLO@ENFOQUE.COM</a>
-<div class="w-full h-px bg-outline-variant opacity-30 my-4"></div><a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit interactive-el text-2xl md:text-4xl" href="#">LINKEDIN // PROFILE</a>
-</div>
-</div>
-<div class="flex flex-col items-end gap-8 font-label-mono-xs text-label-mono-xs uppercase text-on-tertiary-fixed-variant text-right mt-auto">
-<span class="border border-outline-variant p-2 cursor-default bg-background/50 backdrop-blur-sm rounded-lg">[LAT: 51.2194 N // LNG: 4.4025 E]</span>
-<div>© 2024 ENFOQUE.<br/>ALL RIGHTS RESERVED.</div>
-</div>
-</div>
-</footer>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
-<script src="js/scripts.js"></script>
-</body>
+          <section class="offwork relative" id="offwork">
+            <div class="offwork__pin flex h-screen overflow-hidden" data-offwork-pin>
+              <div
+                class="offwork__left w-[28vw] shrink-0 flex flex-col justify-between px-margin-mobile md:px-margin-desktop py-20 border-r technical-line"
+              >
+                <h2 class="offwork__title font-display-xl text-primary uppercase">ENFOQUE<br />[OFF-WORK]</h2>
+                <div class="flex flex-col gap-4">
+                  <p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">
+                    A personal archive &mdash; cats, objects, people. Scroll to pan across.
+                  </p>
+                  <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[04/04]</span>
+                </div>
+              </div>
+              <div class="offwork__track flex h-full" data-offwork-track>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 01"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat1.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[01]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 02"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat1.2.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[02]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 03"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat3.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[03]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 04"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat3.2.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[04]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 05"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat5.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[05]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 06"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat6.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[06]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 07"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat7.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[07]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="cats">
+                  <img
+                    alt="cats shoot 08"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/cat-old.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[08]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="objects">
+                  <img
+                    alt="objects shoot 09"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/object1.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[09]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="objects">
+                  <img
+                    alt="objects shoot 10"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/object2.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[10]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="objects">
+                  <img
+                    alt="objects shoot 11"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/object3.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[11]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="objects">
+                  <img
+                    alt="objects shoot 12"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/object4.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[12]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="objects">
+                  <img
+                    alt="objects shoot 13"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/object5.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[13]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="people">
+                  <img
+                    alt="people shoot 14"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/people1.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[14]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="people">
+                  <img
+                    alt="people shoot 15"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/people2.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[15]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="people">
+                  <img
+                    alt="people shoot 16"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/people3.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[16]</figcaption>
+                </figure>
+                <figure class="offwork__item" data-category="people">
+                  <img
+                    alt="people shoot 17"
+                    class="offwork__img"
+                    decoding="async"
+                    loading="lazy"
+                    src="assets/img/people4.jpg"
+                  />
+                  <figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[17]</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+        </main>
+        <!-- Footer -->
+        <footer
+          class="relative w-full overflow-hidden bg-transparent px-margin-mobile md:px-margin-desktop py-32 border-t border-outline-variant border-dashed transition-all duration-300"
+          id="contact"
+        >
+          <div
+            class="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden select-none pointer-events-none"
+          >
+            <div
+              class="font-display-xl text-display-xl text-surface-variant opacity-10 whitespace-nowrap text-[20vw]"
+              data-speed="0.8"
+            >
+              GET IN TOUCH
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row justify-between items-start gap-16 relative z-10">
+            <div class="flex flex-col gap-8 w-full">
+              <h2
+                class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase sr-only"
+              >
+                GET IN TOUCH
+              </h2>
+              <div
+                class="flex flex-col gap-4 font-headline-lg text-4xl md:text-7xl text-on-surface uppercase tracking-tight w-full"
+              >
+                <a
+                  class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit rgb-split-hover interactive-el"
+                  data-text="HELLO@ENFOQUE.COM"
+                  href="mailto:hello@enfoque.com"
+                  >HELLO@ENFOQUE.COM</a
+                >
+                <div class="w-full h-px bg-outline-variant opacity-30 my-4"></div>
+                <a
+                  class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit interactive-el text-2xl md:text-4xl"
+                  href="#"
+                  >LINKEDIN // PROFILE</a
+                >
+              </div>
+            </div>
+            <div
+              class="flex flex-col items-end gap-8 font-label-mono-xs text-label-mono-xs uppercase text-on-tertiary-fixed-variant text-right mt-auto"
+            >
+              <span
+                class="border border-outline-variant p-2 cursor-default bg-background/50 backdrop-blur-sm rounded-lg"
+                >[LAT: 51.2194 N // LNG: 4.4025 E]</span
+              >
+              <div>© 2024 ENFOQUE.<br />ALL RIGHTS RESERVED.</div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
