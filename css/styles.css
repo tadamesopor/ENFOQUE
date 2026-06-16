@@ -375,62 +375,60 @@ body {
 }
 
 /* ============================================================ */
-/* Off-work — horizontal drag-scroll photo strip               */
+/* Off-work — pinned horizontal-scroll gallery                 */
 /* ============================================================ */
-.photo-strip {
-    display: flex;
-    gap: 0;                 /* edge to edge */
-    overflow-x: auto;
-    overflow-y: hidden;
-    user-select: none;      /* so dragging doesn't select images */
+.offwork__title {
+    font-size: clamp(2.5rem, 6vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
 }
-.photo-strip.is-dragging {
-    scroll-behavior: auto;
-}
-.photo-strip__item {
+.offwork__item {
     position: relative;
-    flex: 0 0 35vw;         /* standard panel width */
-    height: 80vh;
+    min-width: 30vw;        /* each panel is at least 30vw wide */
+    height: 100vh;
+    flex-shrink: 0;
     overflow: hidden;
 }
-.photo-strip__item.is-featured {
-    flex-basis: 55vw;       /* first photo is the wider hero */
-}
-.photo-strip__img {
+.offwork__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(100%);
-    transition: filter 0.7s ease;
-    pointer-events: none;   /* let drag events stay on the strip */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.photo-strip__item:hover .photo-strip__img {
-    filter: grayscale(0%);
+.offwork__item:hover .offwork__img {
+    transform: scale(1.03);
 }
-.photo-strip__label {
+.offwork__label {
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
+    bottom: 1.5rem;
+    left: 1.5rem;
     color: #ffffff;
-    background: rgba(20, 19, 19, 0.6);
-    padding: 0.15rem 0.5rem;
+    background: rgba(20, 19, 19, 0.55);
+    padding: 0.15rem 0.55rem;
     backdrop-filter: blur(4px);
 }
 
-/* Mobile: stack the photos vertically, full width, no horizontal scroll */
+/* Mobile: drop the pin/horizontal mechanic and stack photos vertically */
 @media (max-width: 767px) {
-    .photo-strip {
-        flex-direction: column;
-        overflow-x: visible;
+    .offwork__pin {
+        display: block;
+        height: auto;
+        overflow: visible;
     }
-    .photo-strip__item,
-    .photo-strip__item.is-featured {
-        flex-basis: auto;
+    .offwork__left {
         width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid #262626;
+    }
+    .offwork__track {
+        flex-direction: column;
+        height: auto;
+        transform: none !important; /* clear any inline GSAP transform */
+    }
+    .offwork__item {
+        width: 100%;
+        min-width: 0;
         height: 70vh;
     }
 }

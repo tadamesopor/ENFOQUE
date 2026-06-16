@@ -292,90 +292,88 @@
 </div>
 </div>
 </section>
-<!-- Enfoque Section -->
-<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative">
-<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">ENFOQUE [OFF-WORK]</h2>
+<!-- Off-work: pinned horizontal-scroll gallery. The pin container is held
+     in place by GSAP ScrollTrigger while the track pans left (js/scripts.js).
+     Falls back to a vertical stack on mobile (see .offwork in styles.css). -->
+<section class="offwork relative" id="offwork">
+<div class="offwork__pin flex h-screen overflow-hidden" data-offwork-pin>
+<div class="offwork__left w-[28vw] shrink-0 flex flex-col justify-between px-margin-mobile md:px-margin-desktop py-20 border-r technical-line">
+<h2 class="offwork__title font-display-xl text-primary uppercase">ENFOQUE<br/>[OFF-WORK]</h2>
+<div class="flex flex-col gap-4">
+<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">A personal archive &mdash; cats, objects, people. Scroll to pan across.</p>
 <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[04/04]</span>
 </div>
-<!-- Category Filter -->
-<div class="flex flex-wrap gap-3 mb-8 font-label-mono-sm text-label-mono-sm uppercase tracking-widest" data-gallery-filter>
-<button class="gallery-filter is-active interactive-el" data-filter="all">ALL</button>
-<button class="gallery-filter interactive-el" data-filter="cats">CATS</button>
-<button class="gallery-filter interactive-el" data-filter="objects">OBJECTS</button>
-<button class="gallery-filter interactive-el" data-filter="people">PEOPLE</button>
 </div>
-<!-- Horizontal drag-scroll photo strip. Keeps data-gallery so the category
-     filter above still works; drag to scroll on desktop, stacks on mobile. -->
-<div class="photo-strip no-scrollbar interactive-el" data-strip data-gallery>
-<figure class="photo-strip__item is-featured" data-category="cats">
-<img alt="cats shoot 01" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat1.jpg"/>
-<figcaption class="photo-strip__label">[01]</figcaption>
+<div class="offwork__track flex h-full" data-offwork-track>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 01" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat1.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[01]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 02" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat1.2.jpg"/>
-<figcaption class="photo-strip__label">[02]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 02" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat1.2.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[02]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 03" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat3.jpg"/>
-<figcaption class="photo-strip__label">[03]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 03" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat3.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[03]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 04" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat3.2.jpg"/>
-<figcaption class="photo-strip__label">[04]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 04" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat3.2.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[04]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 05" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat5.jpg"/>
-<figcaption class="photo-strip__label">[05]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 05" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat5.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[05]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 06" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat6.jpg"/>
-<figcaption class="photo-strip__label">[06]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 06" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat6.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[06]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 07" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat7.jpg"/>
-<figcaption class="photo-strip__label">[07]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 07" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat7.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[07]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="cats">
-<img alt="cats shoot 08" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat-old.jpg"/>
-<figcaption class="photo-strip__label">[08]</figcaption>
+<figure class="offwork__item" data-category="cats">
+<img alt="cats shoot 08" class="offwork__img" decoding="async" loading="lazy" src="assets/img/cat-old.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[08]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="objects">
-<img alt="objects shoot 09" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object1.jpg"/>
-<figcaption class="photo-strip__label">[09]</figcaption>
+<figure class="offwork__item" data-category="objects">
+<img alt="objects shoot 09" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object1.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[09]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="objects">
-<img alt="objects shoot 10" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object2.jpg"/>
-<figcaption class="photo-strip__label">[10]</figcaption>
+<figure class="offwork__item" data-category="objects">
+<img alt="objects shoot 10" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object2.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[10]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="objects">
-<img alt="objects shoot 11" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object3.jpg"/>
-<figcaption class="photo-strip__label">[11]</figcaption>
+<figure class="offwork__item" data-category="objects">
+<img alt="objects shoot 11" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object3.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[11]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="objects">
-<img alt="objects shoot 12" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object4.jpg"/>
-<figcaption class="photo-strip__label">[12]</figcaption>
+<figure class="offwork__item" data-category="objects">
+<img alt="objects shoot 12" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object4.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[12]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="objects">
-<img alt="objects shoot 13" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object5.jpg"/>
-<figcaption class="photo-strip__label">[13]</figcaption>
+<figure class="offwork__item" data-category="objects">
+<img alt="objects shoot 13" class="offwork__img" decoding="async" loading="lazy" src="assets/img/object5.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[13]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="people">
-<img alt="people shoot 14" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people1.jpg"/>
-<figcaption class="photo-strip__label">[14]</figcaption>
+<figure class="offwork__item" data-category="people">
+<img alt="people shoot 14" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people1.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[14]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="people">
-<img alt="people shoot 15" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people2.jpg"/>
-<figcaption class="photo-strip__label">[15]</figcaption>
+<figure class="offwork__item" data-category="people">
+<img alt="people shoot 15" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people2.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[15]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="people">
-<img alt="people shoot 16" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people3.jpg"/>
-<figcaption class="photo-strip__label">[16]</figcaption>
+<figure class="offwork__item" data-category="people">
+<img alt="people shoot 16" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people3.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[16]</figcaption>
 </figure>
-<figure class="photo-strip__item" data-category="people">
-<img alt="people shoot 17" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people4.jpg"/>
-<figcaption class="photo-strip__label">[17]</figcaption>
+<figure class="offwork__item" data-category="people">
+<img alt="people shoot 17" class="offwork__img" decoding="async" loading="lazy" src="assets/img/people4.jpg"/>
+<figcaption class="offwork__label font-label-mono-xs text-label-mono-xs">[17]</figcaption>
 </figure>
+</div>
 </div>
 </section>
 </main>

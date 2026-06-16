@@ -361,31 +361,42 @@
 })();
 
 /* ------------------------------------------------------------------ */
-/* Off-work — click-and-drag horizontal scrolling for the photo strip  */
+/* Off-work — pinned horizontal scroll (GSAP ScrollTrigger).           */
+/* The pin container is held in place while the photo track pans left  */
+/* by the same distance you scroll. Desktop only; mobile stacks (CSS). */
 /* ------------------------------------------------------------------ */
-(function initPhotoStrip() {
-    const strip = document.querySelector('[data-strip]');
-    if (!strip) return;
+(function initOffworkScroll() {
+    const pin = document.querySelector('[data-offwork-pin]');
+    const track = document.querySelector('[data-offwork-track]');
+    if (!pin || !track || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    let isDown = false;
-    let startX = 0;
-    let scrollStart = 0;
+    gsap.registerPlugin(ScrollTrigger);
+    const section = pin.closest('.offwork');
+    const left = pin.querySelector('.offwork__left');
 
-    strip.addEventListener('mousedown', (e) => {
-        isDown = true;
-        strip.classList.add('is-dragging');
-        startX = e.pageX;
-        scrollStart = strip.scrollLeft;
-    });
-    const stop = () => {
-        isDown = false;
-        strip.classList.remove('is-dragging');
-    };
-    strip.addEventListener('mouseleave', stop);
-    strip.addEventListener('mouseup', stop);
-    strip.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        strip.scrollLeft = scrollStart - (e.pageX - startX);
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 768px)', () => {
+        // How far the track must travel so its last photo reaches the edge.
+        const distance = () => Math.max(0, track.scrollWidth - (window.innerWidth - left.offsetWidth));
+
+        const tween = gsap.to(track, {
+            x: () => -distance(),
+            ease: 'none',
+            scrollTrigger: {
+                trigger: section,
+                start: 'top top',
+                end: () => '+=' + distance(),
+                pin: pin,
+                scrub: 1,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+            },
+        });
+
+        return () => {
+            if (tween.scrollTrigger) tween.scrollTrigger.kill();
+            tween.kill();
+            gsap.set(track, { clearProps: 'x' });
+        };
     });
 })();
