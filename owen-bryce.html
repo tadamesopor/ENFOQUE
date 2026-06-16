@@ -25,21 +25,44 @@
     </div>
     <!-- Navigation Overlay -->
     <nav
-      class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-8 pointer-events-none"
+      class="fixed top-0 w-full z-50 bg-transparent bg-gradient-to-b from-surface-container-lowest to-transparent flex justify-between items-center px-margin-mobile md:px-margin-desktop py-gutter"
     >
-      <a class="pointer-events-auto flex items-center gap-2 group" href="index.html#work">
-        <span class="material-symbols-outlined text-primary group-hover:-translate-x-1 transition-transform"
+      <a
+        class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg tracking-tighter text-on-surface hover:text-primary transition-colors duration-300"
+        href="index.html"
+      >
+        ENFOQUE
+      </a>
+      <div
+        class="hidden md:flex items-center gap-8 font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-on-surface-variant"
+      >
+        <a
+          class="hover:text-primary transition-colors duration-300 text-primary border-b border-primary pb-1 opacity-70"
+          href="index.html#work"
+          >WORK</a
+        >
+        <a class="hover:text-primary transition-colors duration-300" href="index.html#about">ABOUT</a>
+        <a class="hover:text-primary transition-colors duration-300" href="index.html#contact">CONTACT</a>
+      </div>
+      <div class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-primary">[ONLINE]</div>
+    </nav>
+    <!-- Project Back Link (HUD) -->
+    <div class="fixed top-32 left-margin-mobile md:left-margin-desktop z-40">
+      <a
+        class="flex items-center gap-2 font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-primary transition-colors"
+        href="index.html#work"
+      >
+        <span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0; font-size: 16px"
           >arrow_back</span
         >
-        <span
-          class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-on-surface-variant group-hover:text-primary transition-colors"
-          >PROFILE</span
-        >
+        PROFILE
       </a>
-      <div class="font-label-mono-xs text-label-mono-xs text-outline tracking-widest hidden md:block">
-        [SYS.VER_2.4.1]
-      </div>
-    </nav>
+    </div>
+    <!-- Technical Metadata HUD Corners -->
+    <div class="fixed top-32 right-margin-mobile md:right-margin-desktop z-40 text-right">
+      <p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">[SYS_ID: OB-001]</p>
+      <p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase mt-1">[STATUS: COMPLETED]</p>
+    </div>
     <main class="relative z-10">
       <!-- Hero Section -->
       <section class="min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop relative">
@@ -58,9 +81,9 @@
             class="relative w-full aspect-video md:aspect-[21/9] max-w-5xl mx-auto border border-technical overflow-hidden group"
           >
             <img
-              alt="AIR/CORD Project Hero"
+              alt="Owen Bryce website"
               class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-in-out scale-105 group-hover:scale-100"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEeIfF8F5HGw0hcx8ik1w0HG4Agi8dcRLYg9TLTZ0fxuszOzdzDQ5p_0Y46eEBaCiNKAajjsuSAhs4WlmXFPkqML9y5hD7rH_XP5osuLIgdMWz26_8tGonM7akTsAY8bwGWcYA1nL21dQSxMihZM0Nj8Qf4352f--iLC36y_QHSy5ALZLvc5GNX8Vm3eEX8FdUzh2Oi241Qxr0_vviZ2OshHcKoz416YqcdmDT3I47LNbBvPy5Xck7GwtiiKaMGV3Z9R3Z_m1CyVGN"
+              src="assets/img/owen1.1.png"
             />
             <div
               class="absolute inset-0 flex items-center justify-center bg-surface/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
