@@ -399,50 +399,26 @@ body {
 }
 
 /* ============================================================ */
-/* About section                                               */
+/* About section — image that travels a diagonal path on scroll */
 /* ============================================================ */
-
-/* Cursor photo-trail images (spawned in JS, then fade out and remove) */
-.about-trail__img {
-    position: absolute;
-    z-index: 1;
-    pointer-events: none;
+.about-path-img {
+    position: relative;   /* mobile: sits in the normal flow */
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
     border-radius: 4px;
-    background-size: cover;
-    background-position: center;
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
-    transition: opacity 0.6s ease;
-    will-change: opacity;
-}
-.about-trail__img.is-out {
-    opacity: 0;
-}
-
-/* Sticky crossfading image column */
-.about-sticky {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    border-radius: 0.5rem;
-    overflow: hidden;
 }
 @media (min-width: 768px) {
-    .about-sticky {
-        aspect-ratio: auto;
-        height: 80vh;
+    .about-path-img {
+        position: absolute; /* desktop: centred origin, moved by GSAP */
+        left: 50%;
+        top: 50%;
+        width: clamp(220px, 24vw, 440px);
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        will-change: transform;
     }
-}
-.about-sticky__img {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-.about-sticky__img.is-active {
-    opacity: 1;
 }
 
 /* ============================================================ */
