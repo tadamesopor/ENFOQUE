@@ -169,7 +169,7 @@
 })();
 
 /* ------------------------------------------------------------------ */
-/* Smooth scrolling + scroll-velocity squash & stretch on the cards    */
+/* Smooth scrolling + subtle inward side-curve on the cards (barrel)   */
 /* Needs GSAP + ScrollTrigger + ScrollSmoother and the                 */
 /* #smooth-wrapper > #smooth-content structure. Skipped if absent or   */
 /* if the user prefers reduced motion.                                 */
@@ -192,34 +192,48 @@
     const cards = gsap.utils.toArray('.project-card, [data-gallery] figure');
     if (!cards.length) return;
 
-    gsap.set(cards, { transformOrigin: 'center center', force3D: true });
+    // Cache each card's size so we don't read layout on every scroll frame.
+    const sizes = new Map();
+    const measure = () => cards.forEach((el) => sizes.set(el, { w: el.offsetWidth, h: el.offsetHeight }));
+    measure();
+    window.addEventListener('resize', measure);
 
-    // Squash & stretch: cards compress (or stretch) with scroll speed and
-    // spring back on an elastic ease, giving a soft, spongy feel rather than
-    // a one-directional slant.
-    const clampSquash = gsap.utils.clamp(-0.16, 0.16);
-    const proxy = { squash: 0 };
+    // Subtle inward curve on the LEFT and RIGHT edges only (a barrel/pincushion
+    // pinch). depth is always positive, so the sides only ever squish inward,
+    // never bulge out. bias shifts the pinch point up or down with the scroll
+    // direction. When idle the clip is cleared so cards are plain rectangles.
+    const MAX_DEPTH = 16; // px of inward curve at full speed — kept small/subtle
+    const proxy = { depth: 0, bias: 1 };
 
-    const applySquash = () => {
-        const scaleY = 1 - proxy.squash;
-        const scaleX = 1 + proxy.squash * 0.5;
+    const applyCurve = () => {
+        const flat = proxy.depth < 0.5;
         cards.forEach((el) => {
-            el.style.transform = `scale3d(${scaleX}, ${scaleY}, 1)`;
+            const s = sizes.get(el);
+            if (!s || !s.w) return;
+            if (flat) { el.style.clipPath = ''; return; }
+            const w = s.w;
+            const h = s.h;
+            const d = proxy.depth;
+            const cy = h * (0.5 + proxy.bias * 0.25); // pinch rides higher up / lower down
+            el.style.clipPath =
+                `path("M0 0 L${w} 0 Q${w - d} ${cy} ${w} ${h} L0 ${h} Q${d} ${cy} 0 0 Z")`;
         });
     };
 
     ScrollTrigger.create({
         onUpdate: (self) => {
-            const squash = clampSquash(self.getVelocity() / 2600);
-            // React only when the new squash is stronger, then spring back.
-            if (Math.abs(squash) > Math.abs(proxy.squash)) {
-                proxy.squash = squash;
+            const velocity = self.getVelocity();
+            const target = gsap.utils.clamp(0, MAX_DEPTH, Math.abs(velocity) / 380);
+            // Only deepen on faster scroll, then ease the curve back out to flat.
+            if (target > proxy.depth) {
+                proxy.depth = target;
+                proxy.bias = velocity > 0 ? 1 : -1; // scrolling down: pinch low, up: pinch high
                 gsap.to(proxy, {
-                    squash: 0,
-                    duration: 1.1,
-                    ease: 'elastic.out(1, 0.45)',
+                    depth: 0,
+                    duration: 1.0,
+                    ease: 'power2.out',
                     overwrite: true,
-                    onUpdate: applySquash,
+                    onUpdate: applyCurve,
                 });
             }
         },
