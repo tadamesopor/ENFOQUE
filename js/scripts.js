@@ -166,7 +166,7 @@
 })();
 
 /* ------------------------------------------------------------------ */
-/* Smooth scrolling + scroll-velocity "warp" (skew + vertical squish)  */
+/* Smooth scrolling + scroll-velocity squash & stretch on the cards    */
 /* Needs GSAP + ScrollTrigger + ScrollSmoother and the                 */
 /* #smooth-wrapper > #smooth-content structure. Skipped if absent or   */
 /* if the user prefers reduced motion.                                 */
@@ -186,37 +186,37 @@
         normalizeScroll: true,
     });
 
-    const warpItems = gsap.utils.toArray('.warp-element');
-    if (!warpItems.length) return;
+    const cards = gsap.utils.toArray('.project-card, [data-gallery] figure');
+    if (!cards.length) return;
 
-    gsap.set(warpItems, { transformOrigin: 'center center', force3D: true });
+    gsap.set(cards, { transformOrigin: 'center center', force3D: true });
 
-    const clampSkew = gsap.utils.clamp(-12, 12);     // degrees
-    const clampSquish = gsap.utils.clamp(-0.08, 0.08); // scaleY delta
-    const proxy = { skew: 0, squish: 0 };
+    // Squash & stretch: cards compress (or stretch) with scroll speed and
+    // spring back on an elastic ease, giving a soft, spongy feel rather than
+    // a one-directional slant.
+    const clampSquash = gsap.utils.clamp(-0.16, 0.16);
+    const proxy = { squash: 0 };
 
-    const applyWarp = () => {
-        warpItems.forEach((el) => {
-            el.style.transform = `skewY(${proxy.skew}deg) scaleY(${1 + proxy.squish})`;
+    const applySquash = () => {
+        const scaleY = 1 - proxy.squash;
+        const scaleX = 1 + proxy.squash * 0.5;
+        cards.forEach((el) => {
+            el.style.transform = `scale3d(${scaleX}, ${scaleY}, 1)`;
         });
     };
 
     ScrollTrigger.create({
         onUpdate: (self) => {
-            const velocity = self.getVelocity();
-            const skew = clampSkew(velocity / -180);
-            const squish = clampSquish(velocity / -4000);
-            // Only react when the new warp is stronger, then ease back to rest.
-            if (Math.abs(skew) > Math.abs(proxy.skew)) {
-                proxy.skew = skew;
-                proxy.squish = squish;
+            const squash = clampSquash(self.getVelocity() / 2600);
+            // React only when the new squash is stronger, then spring back.
+            if (Math.abs(squash) > Math.abs(proxy.squash)) {
+                proxy.squash = squash;
                 gsap.to(proxy, {
-                    skew: 0,
-                    squish: 0,
-                    duration: 0.9,
-                    ease: 'power3',
+                    squash: 0,
+                    duration: 1.1,
+                    ease: 'elastic.out(1, 0.45)',
                     overwrite: true,
-                    onUpdate: applyWarp,
+                    onUpdate: applySquash,
                 });
             }
         },
