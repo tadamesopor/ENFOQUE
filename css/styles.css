@@ -509,24 +509,42 @@ body {
 
 /* Mobile: drop the pin/horizontal mechanic and stack photos vertically */
 @media (max-width: 767px) {
+  /* !important because these override Tailwind utilities (flex / h-screen /
+     overflow-hidden) that otherwise win on source order at runtime. */
   .offwork__pin {
-    display: block;
-    height: auto;
-    overflow: visible;
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
   }
   .offwork__left {
-    width: 100%;
-    border-right: 0;
+    width: 100% !important;
+    border-right: 0 !important;
     border-bottom: 1px solid #262626;
   }
   .offwork__track {
     flex-direction: column;
-    height: auto;
+    height: auto !important;
     transform: none !important; /* clear any inline GSAP transform */
   }
   .offwork__item {
     width: 100%;
     min-width: 0;
     height: 70vh;
+  }
+}
+
+/* ============================================================ */
+/* Mobile spacing — the 160px section gap is too tall on phones */
+/* ============================================================ */
+@media (max-width: 767px) {
+  .py-section-gap {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+  .pt-section-gap {
+    padding-top: 4.5rem !important;
+  }
+  .pb-section-gap {
+    padding-bottom: 4.5rem !important;
   }
 }
