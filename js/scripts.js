@@ -298,6 +298,21 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // The photo also changes as you scroll. Preload them so swaps don't flicker.
+  const photos = ["people2", "object3", "cat3", "people4"].map((name) => `assets/img/${name}.jpg`);
+  photos.forEach((src) => {
+    const pre = new Image();
+    pre.src = src;
+  });
+  let currentPhoto = -1;
+  const swapPhoto = (progress) => {
+    const i = Math.min(photos.length - 1, Math.floor(progress * photos.length));
+    if (i !== currentPhoto) {
+      currentPhoto = i;
+      img.src = photos[i];
+    }
+  };
+
   const mm = gsap.matchMedia();
   mm.add("(min-width: 768px)", () => {
     // Keep the image centred on its own origin, then slide it diagonally.
@@ -317,6 +332,7 @@
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => swapPhoto(self.progress),
         },
       },
     );
