@@ -104,6 +104,11 @@ body {
 .nav-link.active::after {
   width: 100%;
 }
+/* Active section link (scroll-spy). Higher specificity than the Tailwind
+   text-* utility, so it wins without !important. */
+.nav-link.active {
+  color: #ffffff;
+}
 
 /* RGB split hover */
 .rgb-split-hover {

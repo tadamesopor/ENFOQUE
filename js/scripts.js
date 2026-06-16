@@ -214,6 +214,38 @@
 })();
 
 /* ------------------------------------------------------------------ */
+/* Nav scroll-spy — highlight the link for the section in view         */
+/* ------------------------------------------------------------------ */
+(function initNavSpy() {
+  if (typeof ScrollTrigger === "undefined") return;
+
+  const ids = ["work", "about", "contact"];
+  const links = {};
+  ids.forEach((id) => {
+    links[id] = document.querySelector(`a.nav-link[href="#${id}"]`);
+  });
+
+  const setActive = (activeId) => {
+    ids.forEach((id) => {
+      if (links[id]) links[id].classList.toggle("active", id === activeId);
+    });
+  };
+
+  ids.forEach((id) => {
+    const section = document.getElementById(id);
+    if (!section || !links[id]) return;
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top center",
+      end: "bottom center",
+      onToggle: (self) => {
+        if (self.isActive) setActive(id);
+      },
+    });
+  });
+})();
+
+/* ------------------------------------------------------------------ */
 /* Skills — expanding-circle card hover + scroll-reactive marquee      */
 /* ------------------------------------------------------------------ */
 (function initSkills() {
