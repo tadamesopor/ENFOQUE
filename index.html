@@ -195,32 +195,83 @@
 <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">ENFOQUE [OFF-WORK]</h2>
 <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[04/04]</span>
 </div>
-<!-- Asymmetric Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<!-- Featured Image (Large) -->
-<div class="md:col-span-2 relative group aspect-[4/3] md:aspect-auto overflow-hidden border technical-line p-2 interactive-el rounded-xl">
-<img alt="High-contrast black and white architectural photography looking up at a brutalist concrete building. The sharp angles and repetitive grid patterns of the facade create a sense of imposing scale. The sky is completely blown out to pure white, emphasizing the starkness of the structure." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeOj16BpTDWIikFoYFfsjH7qfn36rh6n66vK8K8sjNdXFQLSX0FpN2q56zQDDK3MF2HgpFxzHRnAp7MwK5iwVaDujlQTIQGKLT95kJaVQz9Q9dlYBAVes751IJCIlOB_b08t9B5c04KMzH5MG0c4kPDCVwTJZxV-jI5Q_j2DXY_w0W04E0oSimzfnEGq2jIHuh1pGRB0nfYNE-uuUYjiHO5vwqnDIL-O06fPqxmSnvgMABzWMfzku_IQIiVubwTWxWh8E1_s27BMZv"/>
-<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        ISO: 400 // F/2.8 [LOG_045]
-                    </div>
+<!-- Category Filter -->
+<div class="flex flex-wrap gap-3 mb-8 font-label-mono-sm text-label-mono-sm uppercase tracking-widest" data-gallery-filter>
+<button class="gallery-filter is-active interactive-el" data-filter="all">ALL</button>
+<button class="gallery-filter interactive-el" data-filter="cats">CATS</button>
+<button class="gallery-filter interactive-el" data-filter="objects">OBJECTS</button>
+<button class="gallery-filter interactive-el" data-filter="people">PEOPLE</button>
 </div>
-<!-- Smaller Images Stack -->
-<div class="flex flex-col gap-4">
-<!-- Gallery Item 2 -->
-<div class="relative group aspect-square md:flex-1 overflow-hidden border technical-line p-2 interactive-el rounded-xl">
-<img alt="A close-up, abstract macro shot of crushed velvet fabric in deep charcoal grey. The lighting is extremely directional, highlighting the rich textures and creating deep, almost black shadows. The image feels tactile and luxurious, yet dark and moody." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQrANGg0iixn7GZPomHq-RJj-OFGXnBkgMoDpNBtshjiKSGRivXLktOCYMbcJUFIvjtwPT-xgMA625a7t-IWgyEQ7R0lnO0fMLHNZVnSVuUQCNtRG9vLQgUB8mE7vTOyFILZcI5EV-nToXk2Hxn3Jo3uF11AGkQcAFDLFPjRT5KPHTFfSZIFxb4wld_cePNPBEbIqFP40PQSnTkboFKywm0ySjZ822vvDb-1ooYqOjAiMk3qVodN6ZcNcwjNQs37ESTPjeLF_L6LQ9"/>
-<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            ISO: 800 // F/1.4 [LOG_046]
-                        </div>
-</div>
-<!-- Gallery Item 3 -->
-<div class="relative group aspect-square md:flex-1 overflow-hidden border technical-line p-2 interactive-el rounded-xl">
-<img alt="A stark, minimalist landscape featuring a solitary, dead tree standing against a featureless, overcast sky. The image is rendered in extreme high-contrast monochrome, giving it an etched, graphic quality. The mood is desolate and highly atmospheric." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuE_x0awwVOeCnIJUlpFm0wf7cJNYSSgk3MgEXBovnyLjSUIwSQ9kbhsPu_TyFg0aTiSTfqioHz1Vw2R9n0CGst9ipB_veJyCycpZ17DGJURHrcB2bcKbvNfJwts7j5ifYVYcA0vdv1ltnZhscK-UvnUJG9svCoy61BNeprglVSN9-gtagmsfYNrzFRXphb_4G6nNwlz0TJYgjPDcZy7MV_ZCCDe8bsR9vEmYvjeseVOU378vN4x4NRNcGuTDjQaNL8iFYHGcAQ9e6"/>
-<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            ISO: 100 // F/8.0 [LOG_047]
-                        </div>
-</div>
-</div>
+<!-- Photo Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-gallery>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat1.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 01</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat1.2.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 02</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat3.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 03</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat3.2.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 04</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 05" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat5.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 05</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 06" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat6.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 06</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 07" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat7.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 07</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
+<img alt="Cats shoot 08" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/cat-old.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 08</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
+<img alt="Objects shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/object1.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 01</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
+<img alt="Objects shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/object2.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 02</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
+<img alt="Objects shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/object3.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 03</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
+<img alt="Objects shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/object4.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 04</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
+<img alt="Objects shoot 05" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/object5.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 05</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
+<img alt="People shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/people1.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 01</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
+<img alt="People shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/people2.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 02</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
+<img alt="People shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/people3.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 03</figcaption>
+</figure>
+<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
+<img alt="People shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" loading="lazy" src="assets/img/people4.jpg"/>
+<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 04</figcaption>
+</figure>
 </div>
 </section>
 </main>

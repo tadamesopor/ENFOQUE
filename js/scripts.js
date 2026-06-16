@@ -141,3 +141,26 @@
         el.addEventListener('mouseleave', () => cursor.classList.remove('interactive'));
     });
 })();
+
+/* ------------------------------------------------------------------ */
+/* Photography gallery — filter by category (cats / objects / people)  */
+/* ------------------------------------------------------------------ */
+(function initGalleryFilter() {
+    const filterBar = document.querySelector('[data-gallery-filter]');
+    const gallery = document.querySelector('[data-gallery]');
+    if (!filterBar || !gallery) return;
+
+    const buttons = filterBar.querySelectorAll('button[data-filter]');
+    const items = gallery.querySelectorAll('[data-category]');
+
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+            items.forEach((item) => {
+                const show = filter === 'all' || item.dataset.category === filter;
+                item.classList.toggle('hidden', !show);
+            });
+        });
+    });
+})();
