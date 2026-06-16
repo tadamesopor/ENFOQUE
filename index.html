@@ -38,15 +38,15 @@
 <!-- Radial Glow -->
 <div class="radial-glow w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
 <!-- Technical Labels -->
-<div class="absolute top-32 left-margin-mobile md:left-margin-desktop font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
+<div class="absolute top-32 left-margin-mobile md:left-margin-desktop font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase" data-speed="1.15">
                 [SYS.VER: 10.4.2]
             </div>
-<div class="absolute top-32 right-margin-mobile md:right-margin-desktop text-right font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase flex flex-col gap-1">
+<div class="absolute top-32 right-margin-mobile md:right-margin-desktop text-right font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase flex flex-col gap-1" data-speed="1.15">
 <span>[LAT: 51.2194 N]</span>
 <span>[LNG: 4.4025 E]</span>
 </div>
 <div class="flex flex-col items-center justify-center flex-grow text-center z-10 relative">
-<h1 class="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter mb-6 warp-element interactive-el">
+<h1 class="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter mb-6 warp-element interactive-el" data-speed="0.9">
                     DAMIAN<br/>MATTHEEUW
                 </h1>
 <p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant tracking-widest uppercase">
@@ -280,9 +280,11 @@
 </main>
 <!-- Footer -->
 <footer class="relative w-full overflow-hidden bg-transparent px-margin-mobile md:px-margin-desktop py-32 border-t border-outline-variant border-dashed transition-all duration-300" id="contact">
-<div class="font-display-xl text-display-xl text-surface-variant opacity-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 select-none pointer-events-none whitespace-nowrap text-[20vw]">
+<div class="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden select-none pointer-events-none">
+<div class="font-display-xl text-display-xl text-surface-variant opacity-10 whitespace-nowrap text-[20vw]" data-speed="0.8">
             GET IN TOUCH
         </div>
+</div>
 <div class="flex flex-col md:flex-row justify-between items-start gap-16 relative z-10">
 <div class="flex flex-col gap-8 w-full">
 <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase sr-only">GET IN TOUCH</h2>
