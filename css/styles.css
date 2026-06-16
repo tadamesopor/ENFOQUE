@@ -110,6 +110,14 @@ body {
   color: #ffffff;
 }
 
+/* Mobile menu overlay — hidden until toggled open */
+.mobile-menu {
+  display: none;
+}
+.mobile-menu.is-open {
+  display: flex;
+}
+
 /* RGB split hover */
 .rgb-split-hover {
   position: relative;

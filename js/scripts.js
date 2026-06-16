@@ -246,6 +246,22 @@
 })();
 
 /* ------------------------------------------------------------------ */
+/* Mobile menu — open/close the full-screen overlay                    */
+/* ------------------------------------------------------------------ */
+(function initMobileMenu() {
+  const menu = document.querySelector("[data-mobile-menu]");
+  const openBtn = document.querySelector("[data-menu-toggle]");
+  const closeBtn = document.querySelector("[data-menu-close]");
+  if (!menu || !openBtn) return;
+
+  const close = () => menu.classList.remove("is-open");
+  openBtn.addEventListener("click", () => menu.classList.add("is-open"));
+  if (closeBtn) closeBtn.addEventListener("click", close);
+  // Close after a link is tapped (the link's own handler does the scrolling).
+  menu.querySelectorAll("[data-menu-link]").forEach((link) => link.addEventListener("click", close));
+})();
+
+/* ------------------------------------------------------------------ */
 /* Skills — expanding-circle card hover + scroll-reactive marquee      */
 /* ------------------------------------------------------------------ */
 (function initSkills() {

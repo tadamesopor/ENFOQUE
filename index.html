@@ -47,8 +47,29 @@
           >CONTACT</a
         >
       </nav>
-      <div class="font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-widest">[ONLINE]</div>
+      <div class="hidden md:block font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-widest">
+        [ONLINE]
+      </div>
+      <button class="md:hidden text-primary" data-menu-toggle aria-label="Open menu">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
     </header>
+    <!-- Mobile menu overlay (toggled by the hamburger) -->
+    <div
+      class="mobile-menu fixed inset-0 z-[60] bg-background/95 backdrop-blur-md flex-col items-center justify-center gap-8"
+      data-mobile-menu
+    >
+      <button class="absolute top-8 right-margin-mobile text-primary" data-menu-close aria-label="Close menu">
+        <span class="material-symbols-outlined text-3xl">close</span>
+      </button>
+      <a class="font-display-xl-mobile text-display-xl-mobile text-primary uppercase" href="#work" data-menu-link>WORK</a>
+      <a class="font-display-xl-mobile text-display-xl-mobile text-primary uppercase" href="#about" data-menu-link
+        >ABOUT</a
+      >
+      <a class="font-display-xl-mobile text-display-xl-mobile text-primary uppercase" href="#contact" data-menu-link
+        >CONTACT</a
+      >
+    </div>
     <!-- ScrollSmoother wrapper (fixed overlays/header stay outside this) -->
     <div id="smooth-wrapper">
       <div id="smooth-content">
