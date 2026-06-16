@@ -35,6 +35,8 @@
 <main class="flex-grow">
 <!-- Hero Section -->
 <section class="relative min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop pt-32 pb-16">
+<!-- Breathing radial glow behind the name (pure CSS, see .hero-breathe) -->
+<div class="hero-breathe"></div>
 <!-- Radial Glow -->
 <div class="radial-glow w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
 <!-- Technical Labels -->
@@ -45,11 +47,13 @@
 <span>[LAT: 51.2194 N]</span>
 <span>[LNG: 4.4025 E]</span>
 </div>
-<div class="flex flex-col items-center justify-center flex-grow text-center z-10 relative">
-<h1 class="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter mb-6 warp-element interactive-el" data-speed="0.9">
-                    DAMIAN<br/>MATTHEEUW
-                </h1>
-<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant tracking-widest uppercase">
+<div class="flex flex-col justify-center flex-grow z-10 relative w-full">
+<h1 class="hero-name font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter warp-element interactive-el" data-speed="0.9">
+<span class="hero-name__line hero-name__line--left" data-split>DAMIAN</span>
+<span class="hero-rule"></span>
+<span class="hero-name__line hero-name__line--right" data-split>MATTHEEUW</span>
+</h1>
+<p class="hero-role font-label-mono-sm text-label-mono-sm text-on-surface-variant tracking-widest uppercase mt-8 text-center">
                     FRONT-END ARCHITECT // CINEMATIC VISION
                 </p>
 </div>

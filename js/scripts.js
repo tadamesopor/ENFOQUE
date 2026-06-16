@@ -400,3 +400,37 @@
         };
     });
 })();
+
+/* ------------------------------------------------------------------ */
+/* Hero — letter-by-letter intro + role fade-in                        */
+/* ------------------------------------------------------------------ */
+(function initHero() {
+    const role = document.querySelector('.hero-role');
+
+    // Wrap each character of the name in its own span so we can stagger them.
+    const chars = [];
+    document.querySelectorAll('.hero-name [data-split]').forEach((line) => {
+        const text = line.textContent;
+        line.textContent = '';
+        for (const ch of text) {
+            const span = document.createElement('span');
+            span.className = 'hero-name__char';
+            span.textContent = ch;
+            line.appendChild(span);
+            chars.push(span);
+        }
+    });
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || typeof gsap === 'undefined') {
+        // No animation: just make sure everything is visible.
+        if (role) role.style.opacity = '1';
+        return;
+    }
+
+    const tl = gsap.timeline();
+    tl.from(chars, { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out', stagger: 0.05 });
+    if (role) {
+        tl.fromTo(role, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.5);
+    }
+})();

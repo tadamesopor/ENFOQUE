@@ -139,6 +139,56 @@ body {
     opacity: 0.8;
 }
 
+/* Hero — breathing glow + offset name */
+.hero-breathe {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.14) 0%, rgba(100, 150, 255, 0.06) 35%, transparent 70%);
+    opacity: 0.05;
+    animation: hero-breathe 4s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+@keyframes hero-breathe {
+    0%, 100% { opacity: 0.05; transform: scale(1); }
+    50%      { opacity: 0.12; transform: scale(1.08); }
+}
+
+.hero-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.hero-name__line {
+    display: block;
+}
+.hero-name__line--left {
+    align-self: flex-start;
+    text-align: left;
+}
+.hero-name__line--right {
+    align-self: flex-end;
+    text-align: right;
+}
+.hero-rule {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 0.1em 0;
+    background: #8e9192;
+    opacity: 0.4;
+}
+/* Each character is wrapped in a span in JS for the load-in stagger */
+.hero-name__char {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+/* Hidden until the intro animation (or shown immediately if JS/motion off) */
+.hero-role {
+    opacity: 0;
+}
+
 /* Soft radial glows */
 .radial-glow {
     position: absolute;
