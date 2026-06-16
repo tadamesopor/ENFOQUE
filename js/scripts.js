@@ -180,7 +180,7 @@
 
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-  ScrollSmoother.create({
+  const smoother = ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
     smooth: 1.4,
@@ -188,6 +188,29 @@
     // normalizeScroll is intentionally off — it caused noticeable scroll jank.
     normalizeScroll: false,
   });
+
+  // Anchor links (#work, #about, #contact) don't scroll natively while the
+  // content is transformed by ScrollSmoother, so the nav appeared "stuck".
+  // Drive them through the smoother instead, and honour a hash on load (e.g.
+  // arriving from a project page link like index.html#work).
+  const scrollToHash = (hash, smooth) => {
+    if (!hash || hash.length < 2) return;
+    const target = document.querySelector(hash);
+    if (target) smoother.scrollTo(target, smooth, "top top");
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const hash = a.getAttribute("href");
+      if (!hash || hash.length < 2 || !document.querySelector(hash)) return;
+      e.preventDefault();
+      scrollToHash(hash, true);
+    });
+  });
+
+  if (window.location.hash) {
+    requestAnimationFrame(() => scrollToHash(window.location.hash, false));
+  }
 })();
 
 /* ------------------------------------------------------------------ */
