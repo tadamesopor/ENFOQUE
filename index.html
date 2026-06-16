@@ -29,6 +29,9 @@
             [ONLINE]
         </div>
 </header>
+<!-- ScrollSmoother wrapper (fixed overlays/header stay outside this) -->
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <main class="flex-grow">
 <!-- Hero Section -->
 <section class="relative min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop pt-32 pb-16">
@@ -277,12 +280,12 @@
 </main>
 <!-- Footer -->
 <footer class="relative w-full overflow-hidden bg-transparent px-margin-mobile md:px-margin-desktop py-32 border-t border-outline-variant border-dashed transition-all duration-300" id="contact">
-<div class="font-display-xl text-display-xl text-surface-variant opacity-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 select-none pointer-events-none whitespace-nowrap warp-element text-[20vw]">
+<div class="font-display-xl text-display-xl text-surface-variant opacity-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 select-none pointer-events-none whitespace-nowrap text-[20vw]">
             GET IN TOUCH
         </div>
 <div class="flex flex-col md:flex-row justify-between items-start gap-16 relative z-10">
 <div class="flex flex-col gap-8 w-full">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element sr-only">GET IN TOUCH</h2>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase sr-only">GET IN TOUCH</h2>
 <div class="flex flex-col gap-4 font-headline-lg text-4xl md:text-7xl text-on-surface uppercase tracking-tight w-full">
 <a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit rgb-split-hover interactive-el" data-text="HELLO@ENFOQUE.COM" href="mailto:hello@enfoque.com">HELLO@ENFOQUE.COM</a>
 <div class="w-full h-px bg-outline-variant opacity-30 my-4"></div><a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit interactive-el text-2xl md:text-4xl" href="#">LINKEDIN // PROFILE</a>
@@ -294,6 +297,11 @@
 </div>
 </div>
 </footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
 <script src="js/scripts.js"></script>
 </body>
 </html>

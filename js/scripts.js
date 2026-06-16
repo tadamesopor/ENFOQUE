@@ -164,3 +164,61 @@
         });
     });
 })();
+
+/* ------------------------------------------------------------------ */
+/* Smooth scrolling + scroll-velocity "warp" (skew + vertical squish)  */
+/* Needs GSAP + ScrollTrigger + ScrollSmoother and the                 */
+/* #smooth-wrapper > #smooth-content structure. Skipped if absent or   */
+/* if the user prefers reduced motion.                                 */
+/* ------------------------------------------------------------------ */
+(function initWarpScroll() {
+    if (typeof gsap === 'undefined' || typeof ScrollSmoother === 'undefined') return;
+    if (!document.getElementById('smooth-wrapper')) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+    ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: 1.4,
+        effects: true,
+        normalizeScroll: true,
+    });
+
+    const warpItems = gsap.utils.toArray('.warp-element');
+    if (!warpItems.length) return;
+
+    gsap.set(warpItems, { transformOrigin: 'center center', force3D: true });
+
+    const clampSkew = gsap.utils.clamp(-12, 12);     // degrees
+    const clampSquish = gsap.utils.clamp(-0.08, 0.08); // scaleY delta
+    const proxy = { skew: 0, squish: 0 };
+
+    const applyWarp = () => {
+        warpItems.forEach((el) => {
+            el.style.transform = `skewY(${proxy.skew}deg) scaleY(${1 + proxy.squish})`;
+        });
+    };
+
+    ScrollTrigger.create({
+        onUpdate: (self) => {
+            const velocity = self.getVelocity();
+            const skew = clampSkew(velocity / -180);
+            const squish = clampSquish(velocity / -4000);
+            // Only react when the new warp is stronger, then ease back to rest.
+            if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                proxy.skew = skew;
+                proxy.squish = squish;
+                gsap.to(proxy, {
+                    skew: 0,
+                    squish: 0,
+                    duration: 0.9,
+                    ease: 'power3',
+                    overwrite: true,
+                    onUpdate: applyWarp,
+                });
+            }
+        },
+    });
+})();
