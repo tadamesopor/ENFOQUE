@@ -524,7 +524,6 @@
 (function initHeroParallax() {
   const hero = document.querySelector("[data-hero-trail]");
   if (!hero) return;
-  if (window.matchMedia("(hover: none)").matches) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const layers = Array.from(hero.querySelectorAll("[data-hero-parallax]")).map((el) => ({
@@ -537,12 +536,9 @@
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
+  const clamp = (v) => Math.max(-1, Math.min(1, v));
 
-  window.addEventListener("mousemove", (e) => {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 2; // -1..1
-    targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-
+  // Smoothly ease the layers toward the target offset every frame.
   function loop() {
     currentX += (targetX - currentX) * 0.08;
     currentY += (targetY - currentY) * 0.08;
@@ -552,4 +548,45 @@
     requestAnimationFrame(loop);
   }
   loop();
+
+  const isTouch = window.matchMedia("(hover: none)").matches;
+
+  if (!isTouch) {
+    // Desktop: follow the cursor.
+    window.addEventListener("mousemove", (e) => {
+      targetX = (e.clientX / window.innerWidth - 0.5) * 2; // -1..1
+      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+    return;
+  }
+
+  // Mobile: drive the parallax with the device gyroscope. The first reading
+  // becomes the neutral baseline so it works at whatever angle you're holding.
+  let baseGamma = null;
+  let baseBeta = null;
+  const onOrient = (e) => {
+    if (e.gamma === null || e.beta === null) return;
+    if (baseGamma === null) {
+      baseGamma = e.gamma;
+      baseBeta = e.beta;
+    }
+    targetX = clamp((e.gamma - baseGamma) / 25); // left/right tilt
+    targetY = clamp((e.beta - baseBeta) / 25); // front/back tilt
+  };
+  const start = () => window.addEventListener("deviceorientation", onOrient);
+
+  if (typeof DeviceOrientationEvent === "undefined") return;
+  if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    // iOS 13+ requires permission, requested from a user gesture (a tap).
+    const requestOnce = () => {
+      DeviceOrientationEvent.requestPermission()
+        .then((state) => {
+          if (state === "granted") start();
+        })
+        .catch(() => {});
+    };
+    window.addEventListener("touchend", requestOnce, { once: true });
+  } else {
+    start();
+  }
 })();
