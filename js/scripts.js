@@ -501,3 +501,41 @@
   tick();
   setInterval(tick, 1000);
 })();
+
+/* ------------------------------------------------------------------ */
+/* Hero — subtle cursor parallax so the layers don't feel flat         */
+/* Elements with data-hero-parallax="N" drift by N px towards the      */
+/* cursor (negative N drifts the opposite way). Smoothed with a lerp.  */
+/* ------------------------------------------------------------------ */
+(function initHeroParallax() {
+  const hero = document.querySelector("[data-hero-trail]");
+  if (!hero) return;
+  if (window.matchMedia("(hover: none)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const layers = Array.from(hero.querySelectorAll("[data-hero-parallax]")).map((el) => ({
+    el,
+    depth: parseFloat(el.dataset.heroParallax) || 0,
+  }));
+  if (!layers.length) return;
+
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  window.addEventListener("mousemove", (e) => {
+    targetX = (e.clientX / window.innerWidth - 0.5) * 2; // -1..1
+    targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function loop() {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+    layers.forEach(({ el, depth }) => {
+      el.style.transform = `translate3d(${currentX * depth}px, ${currentY * depth}px, 0)`;
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();

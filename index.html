@@ -59,21 +59,26 @@
             data-hero-trail
           >
             <div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-              <!-- Left: short description + giant stacked name -->
-              <div class="md:col-span-7 relative z-10">
+              <!-- Left: short description + giant stacked name. z-20 so the
+                   name overlaps on top of the portrait image. -->
+              <div class="md:col-span-7 relative z-20">
                 <p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">
                   Building digital experiences and capturing the world through a lens. Front-end developer and
                   photographer.
                 </p>
                 <h1
-                  class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[16vw] md:text-[11vw] interactive-el"
+                  class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[15vw] md:text-[12.5vw] whitespace-nowrap interactive-el"
+                  data-hero-parallax="14"
                 >
                   <span class="block" data-split>DAMIAN</span>
                   <span class="block" data-split>MATTHEEUW</span>
                 </h1>
               </div>
               <!-- Right: portrait image -->
-              <div class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm">
+              <div
+                class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm"
+                data-hero-parallax="-22"
+              >
                 <img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/people1.jpg" />
               </div>
             </div>
@@ -81,7 +86,7 @@
             <div
               class="relative z-10 flex justify-between items-center border-t technical-line pt-4 mt-6 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest"
             >
-              <span>ANTWERP, BE</span>
+              <span>EINDHOVEN, NL</span>
               <span id="hero-date">&mdash;</span>
               <span id="hero-time">--:--</span>
             </div>
@@ -226,7 +231,7 @@
                 <h2
                   class="about-statement md:absolute md:left-margin-desktop md:top-1/2 md:-translate-y-1/2 md:max-w-[52%] font-display-xl text-primary uppercase font-bold tracking-tight text-[9vw] md:text-[5vw] leading-[0.95]"
                 >
-                  Front-end developer &amp; photographer based in Antwerp.
+                  Front-end developer &amp; photographer based in Eindhoven.
                 </h2>
                 <!-- Secondary text patch (right) -->
                 <div
@@ -614,7 +619,7 @@
             >
               <span
                 class="border border-outline-variant p-2 cursor-default bg-background/50 backdrop-blur-sm rounded-lg"
-                >[LAT: 51.2194 N // LNG: 4.4025 E]</span
+                >[LAT: 51.4416 N // LNG: 5.4697 E]</span
               >
               <div>© 2024 ENFOQUE.<br />ALL RIGHTS RESERVED.</div>
             </div>
