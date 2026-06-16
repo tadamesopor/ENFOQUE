@@ -189,31 +189,45 @@
         normalizeScroll: true,
     });
 
-    const cards = gsap.utils.toArray('.project-card, [data-gallery] figure');
+    // Curve the image areas only (project-card image wrappers + gallery tiles),
+    // never the whole card, so the title text can never be clipped by the curve.
+    const cards = gsap.utils.toArray('.project-card > .relative, [data-gallery] figure');
     if (!cards.length) return;
 
     // Cache each card's size so we don't read layout on every scroll frame.
+    // A ResizeObserver keeps these current as images and web fonts load — if we
+    // measured only once, a late font swap would grow the card and the stale
+    // clip-path would slice the bottom (and the title) off.
     const sizes = new Map();
-    const measure = () => cards.forEach((el) => sizes.set(el, { w: el.offsetWidth, h: el.offsetHeight }));
-    measure();
-    window.addEventListener('resize', measure);
+    const measureOne = (el) => sizes.set(el, { w: el.offsetWidth, h: el.offsetHeight });
+    cards.forEach(measureOne);
 
-    // Subtle inward curve on the LEFT and RIGHT edges only (a barrel/pincushion
-    // pinch). depth is always positive, so the sides only ever squish inward,
-    // never bulge out. bias shifts the pinch point up or down with the scroll
-    // direction. When idle the clip is cleared so cards are plain rectangles.
-    const MAX_DEPTH = 16; // px of inward curve at full speed — kept small/subtle
-    const proxy = { depth: 0, bias: 1 };
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver((entries) => entries.forEach((e) => measureOne(e.target)));
+        cards.forEach((el) => ro.observe(el));
+    } else {
+        const remeasure = () => cards.forEach(measureOne);
+        window.addEventListener('resize', remeasure);
+        window.addEventListener('load', remeasure);
+    }
+
+    // Inward curve on the LEFT and RIGHT edges only (a barrel/pincushion pinch).
+    // Depth scales with the card's width so big and small cards curve by a
+    // similar proportion, and it's always inward (sides squish, never bulge).
+    // bias shifts the pinch point up or down with the scroll direction.
+    const DEPTH_RATIO = 0.045; // curve depth as a fraction of card width
+    const MAX_DEPTH = 55;      // px hard cap so very wide cards don't over-curve
+    const proxy = { amount: 0, bias: 1 }; // amount: 0 (flat) .. 1 (full)
 
     const applyCurve = () => {
-        const flat = proxy.depth < 0.5;
+        const flat = proxy.amount < 0.02;
         cards.forEach((el) => {
             const s = sizes.get(el);
             if (!s || !s.w) return;
             if (flat) { el.style.clipPath = ''; return; }
             const w = s.w;
             const h = s.h;
-            const d = proxy.depth;
+            const d = Math.min(w * DEPTH_RATIO, MAX_DEPTH) * proxy.amount;
             const cy = h * (0.5 + proxy.bias * 0.25); // pinch rides higher up / lower down
             el.style.clipPath =
                 `path("M0 0 L${w} 0 Q${w - d} ${cy} ${w} ${h} L0 ${h} Q${d} ${cy} 0 0 Z")`;
@@ -223,13 +237,13 @@
     ScrollTrigger.create({
         onUpdate: (self) => {
             const velocity = self.getVelocity();
-            const target = gsap.utils.clamp(0, MAX_DEPTH, Math.abs(velocity) / 380);
+            const target = gsap.utils.clamp(0, 1, Math.abs(velocity) / 1500);
             // Only deepen on faster scroll, then ease the curve back out to flat.
-            if (target > proxy.depth) {
-                proxy.depth = target;
+            if (target > proxy.amount) {
+                proxy.amount = target;
                 proxy.bias = velocity > 0 ? 1 : -1; // scrolling down: pinch low, up: pinch high
                 gsap.to(proxy, {
-                    depth: 0,
+                    amount: 0,
                     duration: 1.0,
                     ease: 'power2.out',
                     overwrite: true,
