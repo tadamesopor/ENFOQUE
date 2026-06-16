@@ -186,7 +186,8 @@
     content: "#smooth-content",
     smooth: 1.4,
     effects: true,
-    normalizeScroll: true,
+    // normalizeScroll is intentionally off — it caused noticeable scroll jank.
+    normalizeScroll: false,
   });
 
   // Each warp target curves only the OUTER edge(s) of its section so a group

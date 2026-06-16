@@ -46,7 +46,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 45;
-  opacity: 0.05;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -251,10 +251,9 @@ body {
   z-index: -1;
 }
 
-/* Project card hover effects.
-   No overflow:hidden here — the image has its own clipping wrapper, and
-   clipping the whole card cut off the bottom of the titles. */
+/* Project card hover effects */
 .project-card {
+  overflow: hidden;
   position: relative;
 }
 .project-card img {
@@ -263,12 +262,10 @@ body {
 .project-card:hover img {
   transform: scale(1.05);
 }
+/* The info no longer starts nudged down — that 10px push was being clipped
+   by the card's overflow:hidden and cut the bottom off the titles. */
 .project-card .project-info {
-  transform: translateY(10px);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.project-card:hover .project-info {
-  transform: translateY(0);
 }
 .project-card .hover-arrow {
   transform: translate(-10px, 10px);
@@ -310,7 +307,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 45;
-  opacity: 0.05;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -389,7 +386,7 @@ body {
 .skill-card {
   position: relative;
   overflow: hidden;
-  min-height: 220px;
+  min-height: 160px;
   border-radius: 0.5rem;
   background: #ffffff;
   color: #0a0a0a;
