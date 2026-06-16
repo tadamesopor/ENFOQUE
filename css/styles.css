@@ -251,9 +251,10 @@ body {
   z-index: -1;
 }
 
-/* Project card hover effects */
+/* Project card hover effects.
+   No overflow:hidden here — the image has its own clipping wrapper, and
+   clipping the whole card cut off the bottom of the titles. */
 .project-card {
-  overflow: hidden;
   position: relative;
 }
 .project-card img {
