@@ -447,25 +447,41 @@
     const photos = ['people1', 'object1', 'cat1', 'people2', 'object3', 'cat5', 'people3', 'object5']
         .map((name) => `assets/img/${name}.jpg`);
     let index = 0;
-    let lastSpawn = 0;
+
+    // Density is driven by cursor speed: we spawn a photo every STEP pixels of
+    // travel, so moving fast drops many and moving slowly drops few.
+    const STEP = 55;
+    let lastX = null;
+    let lastY = null;
+    let travelled = 0;
 
     hero.addEventListener('mousemove', (e) => {
-        const now = performance.now();
-        if (now - lastSpawn < 80) return; // throttle ~80ms
-        lastSpawn = now;
+        if (lastX === null) { lastX = e.clientX; lastY = e.clientY; return; }
+        travelled += Math.hypot(e.clientX - lastX, e.clientY - lastY);
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (travelled < STEP) return;
+        travelled = 0;
 
         const rect = hero.getBoundingClientRect();
-        const img = document.createElement('div');
+        const img = document.createElement('img');
         img.className = 'hero-trail__img';
+        img.alt = '';
+        img.src = photos[index % photos.length];
+        index++;
         const offsetX = Math.random() * 30 - 15; // +/-15px
         const offsetY = Math.random() * 30 - 15;
         img.style.left = e.clientX - rect.left + offsetX + 'px';
         img.style.top = e.clientY - rect.top + offsetY + 'px';
         img.style.setProperty('--r', Math.random() * 24 - 12 + 'deg'); // -12..12deg
-        img.style.backgroundImage = `url('${photos[index % photos.length]}')`;
-        index++;
         hero.appendChild(img);
 
-        setTimeout(() => img.remove(), 700);
+        setTimeout(() => img.remove(), 900);
+    });
+
+    hero.addEventListener('mouseleave', () => {
+        lastX = null;
+        lastY = null;
+        travelled = 0;
     });
 })();
