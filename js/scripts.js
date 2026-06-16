@@ -169,12 +169,11 @@
 })();
 
 /* ------------------------------------------------------------------ */
-/* Smooth scrolling + subtle inward side-curve on the cards (barrel)   */
-/* Needs GSAP + ScrollTrigger + ScrollSmoother and the                 */
-/* #smooth-wrapper > #smooth-content structure. Skipped if absent or   */
-/* if the user prefers reduced motion.                                 */
+/* Smooth scrolling (GSAP ScrollSmoother).                             */
+/* Needs GSAP + ScrollSmoother and the #smooth-wrapper >               */
+/* #smooth-content structure. Skipped if absent or reduced-motion.     */
 /* ------------------------------------------------------------------ */
-(function initWarpScroll() {
+(function initSmoothScroll() {
   if (typeof gsap === "undefined" || typeof ScrollSmoother === "undefined") return;
   if (!document.getElementById("smooth-wrapper")) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -188,79 +187,6 @@
     effects: true,
     // normalizeScroll is intentionally off — it caused noticeable scroll jank.
     normalizeScroll: false,
-  });
-
-  // Each warp target curves only the OUTER edge(s) of its section so a group
-  // reads as one warping surface instead of every card pinching both its own
-  // sides. data-warp says which edge(s) to curve: "both" (a full-width banner
-  // or the whole gallery block), "left" (left card in a row) or "right".
-  const targets = gsap.utils.toArray("[data-warp]");
-  if (!targets.length) return;
-
-  // Cache sizes; a ResizeObserver keeps them current as images and web fonts
-  // load, so a late layout shift can't leave a stale clip-path behind.
-  const sizes = new Map();
-  const measureOne = (el) => sizes.set(el, { w: el.offsetWidth, h: el.offsetHeight });
-  targets.forEach(measureOne);
-
-  if (window.ResizeObserver) {
-    const ro = new ResizeObserver((entries) => entries.forEach((e) => measureOne(e.target)));
-    targets.forEach((el) => ro.observe(el));
-  } else {
-    const remeasure = () => targets.forEach(measureOne);
-    window.addEventListener("resize", remeasure);
-    window.addEventListener("load", remeasure);
-  }
-
-  // Curve depth scales with width (so a whole section and a single card bow by
-  // a similar proportion) and is always inward. bias slides the pinch point up
-  // or down with the scroll direction.
-  const DEPTH_RATIO = 0.04;
-  const MAX_DEPTH = 60;
-  const proxy = { amount: 0, bias: 1 }; // amount: 0 (flat) .. 1 (full)
-
-  const pathFor = (edge, w, h, d, cy) => {
-    const leftCurve = `Q${d} ${cy} 0 0`;
-    const rightCurve = `Q${w - d} ${cy} ${w} ${h}`;
-    if (edge === "left") return `M0 0 L${w} 0 L${w} ${h} L0 ${h} ${leftCurve} Z`;
-    if (edge === "right") return `M0 0 L${w} 0 ${rightCurve} L0 ${h} L0 0 Z`;
-    return `M0 0 L${w} 0 ${rightCurve} L0 ${h} ${leftCurve} Z`; // both
-  };
-
-  const applyCurve = () => {
-    const flat = proxy.amount < 0.02;
-    targets.forEach((el) => {
-      const s = sizes.get(el);
-      if (!s || !s.w) return;
-      if (flat) {
-        el.style.clipPath = "";
-        return;
-      }
-      const w = s.w;
-      const h = s.h;
-      const d = Math.min(w * DEPTH_RATIO, MAX_DEPTH) * proxy.amount;
-      const cy = h * (0.5 + proxy.bias * 0.25);
-      el.style.clipPath = `path("${pathFor(el.dataset.warp, w, h, d, cy)}")`;
-    });
-  };
-
-  ScrollTrigger.create({
-    onUpdate: (self) => {
-      const velocity = self.getVelocity();
-      const target = gsap.utils.clamp(0, 1, Math.abs(velocity) / 1500);
-      // Only deepen on faster scroll, then ease the curve back out to flat.
-      if (target > proxy.amount) {
-        proxy.amount = target;
-        proxy.bias = velocity > 0 ? 1 : -1; // scrolling down: pinch low, up: pinch high
-        gsap.to(proxy, {
-          amount: 0,
-          duration: 1.0,
-          ease: "power2.out",
-          overwrite: true,
-          onUpdate: applyCurve,
-        });
-      }
-    },
   });
 })();
 

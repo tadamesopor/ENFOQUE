@@ -256,10 +256,12 @@ body {
   overflow: hidden;
   position: relative;
 }
-.project-card img {
+.project-card img,
+.project-card video {
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.project-card:hover img {
+.project-card:hover img,
+.project-card:hover video {
   transform: scale(1.05);
 }
 /* The info no longer starts nudged down — that 10px push was being clipped
