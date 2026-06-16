@@ -85,8 +85,11 @@
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     function resizeCanvasToDisplaySize(canvas) {
-        const displayWidth = canvas.clientWidth;
-        const displayHeight = canvas.clientHeight;
+        // Render at half resolution; the shader is a soft blurred gradient so
+        // the lower buffer is imperceptible once CSS stretches it to full size.
+        const scale = 0.5;
+        const displayWidth = Math.max(1, Math.floor(canvas.clientWidth * scale));
+        const displayHeight = Math.max(1, Math.floor(canvas.clientHeight * scale));
         if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
             canvas.width = displayWidth;
             canvas.height = displayHeight;
