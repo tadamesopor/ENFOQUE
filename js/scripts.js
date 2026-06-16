@@ -189,48 +189,54 @@
         normalizeScroll: true,
     });
 
-    // Curve the image areas only (project-card image wrappers + gallery tiles),
-    // never the whole card, so the title text can never be clipped by the curve.
-    const cards = gsap.utils.toArray('.project-card > .relative, [data-gallery] figure');
-    if (!cards.length) return;
+    // Each warp target curves only the OUTER edge(s) of its section so a group
+    // reads as one warping surface instead of every card pinching both its own
+    // sides. data-warp says which edge(s) to curve: "both" (a full-width banner
+    // or the whole gallery block), "left" (left card in a row) or "right".
+    const targets = gsap.utils.toArray('[data-warp]');
+    if (!targets.length) return;
 
-    // Cache each card's size so we don't read layout on every scroll frame.
-    // A ResizeObserver keeps these current as images and web fonts load — if we
-    // measured only once, a late font swap would grow the card and the stale
-    // clip-path would slice the bottom (and the title) off.
+    // Cache sizes; a ResizeObserver keeps them current as images and web fonts
+    // load, so a late layout shift can't leave a stale clip-path behind.
     const sizes = new Map();
     const measureOne = (el) => sizes.set(el, { w: el.offsetWidth, h: el.offsetHeight });
-    cards.forEach(measureOne);
+    targets.forEach(measureOne);
 
     if (window.ResizeObserver) {
         const ro = new ResizeObserver((entries) => entries.forEach((e) => measureOne(e.target)));
-        cards.forEach((el) => ro.observe(el));
+        targets.forEach((el) => ro.observe(el));
     } else {
-        const remeasure = () => cards.forEach(measureOne);
+        const remeasure = () => targets.forEach(measureOne);
         window.addEventListener('resize', remeasure);
         window.addEventListener('load', remeasure);
     }
 
-    // Inward curve on the LEFT and RIGHT edges only (a barrel/pincushion pinch).
-    // Depth scales with the card's width so big and small cards curve by a
-    // similar proportion, and it's always inward (sides squish, never bulge).
-    // bias shifts the pinch point up or down with the scroll direction.
-    const DEPTH_RATIO = 0.045; // curve depth as a fraction of card width
-    const MAX_DEPTH = 55;      // px hard cap so very wide cards don't over-curve
+    // Curve depth scales with width (so a whole section and a single card bow by
+    // a similar proportion) and is always inward. bias slides the pinch point up
+    // or down with the scroll direction.
+    const DEPTH_RATIO = 0.04;
+    const MAX_DEPTH = 60;
     const proxy = { amount: 0, bias: 1 }; // amount: 0 (flat) .. 1 (full)
+
+    const pathFor = (edge, w, h, d, cy) => {
+        const leftCurve = `Q${d} ${cy} 0 0`;
+        const rightCurve = `Q${w - d} ${cy} ${w} ${h}`;
+        if (edge === 'left') return `M0 0 L${w} 0 L${w} ${h} L0 ${h} ${leftCurve} Z`;
+        if (edge === 'right') return `M0 0 L${w} 0 ${rightCurve} L0 ${h} L0 0 Z`;
+        return `M0 0 L${w} 0 ${rightCurve} L0 ${h} ${leftCurve} Z`; // both
+    };
 
     const applyCurve = () => {
         const flat = proxy.amount < 0.02;
-        cards.forEach((el) => {
+        targets.forEach((el) => {
             const s = sizes.get(el);
             if (!s || !s.w) return;
             if (flat) { el.style.clipPath = ''; return; }
             const w = s.w;
             const h = s.h;
             const d = Math.min(w * DEPTH_RATIO, MAX_DEPTH) * proxy.amount;
-            const cy = h * (0.5 + proxy.bias * 0.25); // pinch rides higher up / lower down
-            el.style.clipPath =
-                `path("M0 0 L${w} 0 Q${w - d} ${cy} ${w} ${h} L0 ${h} Q${d} ${cy} 0 0 Z")`;
+            const cy = h * (0.5 + proxy.bias * 0.25);
+            el.style.clipPath = `path("${pathFor(el.dataset.warp, w, h, d, cy)}")`;
         });
     };
 
