@@ -434,3 +434,38 @@
         tl.fromTo(role, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.5);
     }
 })();
+
+/* ------------------------------------------------------------------ */
+/* Hero — cursor image trail (hero section only, skipped on touch)     */
+/* ------------------------------------------------------------------ */
+(function initHeroTrail() {
+    const hero = document.querySelector('[data-hero-trail]');
+    if (!hero) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    // Photos cycled in order — swap these for any files in assets/img/.
+    const photos = ['people1', 'object1', 'cat1', 'people2', 'object3', 'cat5', 'people3', 'object5']
+        .map((name) => `assets/img/${name}.jpg`);
+    let index = 0;
+    let lastSpawn = 0;
+
+    hero.addEventListener('mousemove', (e) => {
+        const now = performance.now();
+        if (now - lastSpawn < 80) return; // throttle ~80ms
+        lastSpawn = now;
+
+        const rect = hero.getBoundingClientRect();
+        const img = document.createElement('div');
+        img.className = 'hero-trail__img';
+        const offsetX = Math.random() * 30 - 15; // +/-15px
+        const offsetY = Math.random() * 30 - 15;
+        img.style.left = e.clientX - rect.left + offsetX + 'px';
+        img.style.top = e.clientY - rect.top + offsetY + 'px';
+        img.style.setProperty('--r', Math.random() * 24 - 12 + 'deg'); // -12..12deg
+        img.style.backgroundImage = `url('${photos[index % photos.length]}')`;
+        index++;
+        hero.appendChild(img);
+
+        setTimeout(() => img.remove(), 700);
+    });
+})();

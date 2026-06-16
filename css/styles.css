@@ -139,6 +139,26 @@ body {
     opacity: 0.8;
 }
 
+/* Hero — cursor image trail (spawned in JS, auto-removed after 700ms) */
+.hero-trail__img {
+    position: absolute;
+    z-index: 20;           /* above the hero text (z-10), below the fixed nav (z-40) */
+    pointer-events: none;
+    width: 100px;
+    height: 130px;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+    animation: hero-trail-fade 700ms ease forwards;
+    will-change: opacity;
+}
+@keyframes hero-trail-fade {
+    0%   { opacity: 0; }
+    15%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 /* Hero — breathing glow + offset name */
 .hero-breathe {
     position: absolute;
