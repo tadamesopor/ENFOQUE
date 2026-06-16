@@ -1,0 +1,11 @@
+# Local MCP / secrets — never commit API keys
+.mcp.json
+**/.mcp.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# Dependencies (if ever added)
+node_modules/

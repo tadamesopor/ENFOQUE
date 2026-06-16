@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Damian Mattheeuw - ENFOQUE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#e4e2e1",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-container": "#656464",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-primary-fixed": "#1a1c1c",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary-container": "#4a4949",
+                        "surface-dim": "#141313",
+                        "outline": "#8e9192",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "secondary": "#c9c6c5",
+                        "surface-variant": "#353434",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-tint": "#c6c6c7",
+                        "on-error": "#690005",
+                        "on-secondary": "#313030",
+                        "on-primary": "#2f3131",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "on-surface-variant": "#c4c7c8",
+                        "outline-variant": "#444748",
+                        "on-secondary-fixed-variant": "#474646",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-container-highest": "#353434",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "on-primary-container": "#636565",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#bab8b7",
+                        "primary-container": "#e2e2e2",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface": "#141313",
+                        "on-tertiary": "#303030",
+                        "tertiary-fixed": "#e4e2e1",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#ffffff",
+                        "background": "#141313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "section-gap": "160px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "display-xl": ["Space Grotesk"],
+                        "display-xl-mobile": ["Space Grotesk"],
+                        "label-mono-xs": ["Space Mono"],
+                        "body-md": ["Inter"],
+                        "label-mono-sm": ["Space Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "display-xl": ["140px", { "lineHeight": "120px", "letterSpacing": "-0.04em", "fontWeight": "600" }],
+                        "display-xl-mobile": ["64px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-mono-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.15em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-mono-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #141313;
+            color: #F5F5F5;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        ::selection {
+            background: #F5F5F5;
+            color: #0A0A0A;
+        }
+        .technical-line {
+            border-color: #262626;
+        }
+        .glow-primary {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .hover-desaturate {
+            filter: grayscale(80%);
+            transition: filter 0.3s ease;
+        }
+        .hover-desaturate:hover {
+            filter: grayscale(0%);
+        }
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        /* Noise overlay */
+        .film-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 45;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Shader Canvas */
+        #shader-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -100;
+            pointer-events: none;
+        }
+
+        .custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.interactive {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            mix-blend-mode: normal;
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* RGB Split Hover */
+        .rgb-split-hover {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .rgb-split-hover::before,
+        .rgb-split-hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+        .rgb-split-hover::before {
+            color: #ff00ff;
+            z-index: -1;
+        }
+        .rgb-split-hover::after {
+            color: #00ffff;
+            z-index: -2;
+        }
+        .rgb-split-hover:hover {
+            transform: scale(1.02);
+        }
+        .rgb-split-hover:hover::before {
+            transform: translate(-3px, 2px);
+            opacity: 0.8;
+        }
+        .rgb-split-hover:hover::after {
+            transform: translate(3px, -2px);
+            opacity: 0.8;
+        }
+
+        /* Soft Radial Glows */
+        .radial-glow {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Project Card Hover Effects */
+        .project-card {
+            overflow: hidden;
+            position: relative;
+        }
+        .project-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        .project-card .project-info {
+            transform: translateY(10px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+        .project-card .hover-arrow {
+            transform: translate(-10px, 10px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover .hover-arrow {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+        .project-card .hover-line {
+            width: 0;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover .hover-line {
+            width: 100%;
+        }
+
+        /* Bento Grid Shadows & Lift */
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative">
+<canvas id="shader-bg"></canvas>
+<div class="film-grain"></div>
+<div class="custom-cursor" id="custom-cursor"></div>
+<div class="fixed inset-0 scanline z-50 mix-blend-overlay opacity-30"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-40 bg-transparent flex justify-between items-center px-margin-mobile md:px-margin-desktop py-8 transition-opacity duration-500 ease-in-out">
+<div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tighter uppercase warp-element">
+            ENFOQUE
+        </div>
+<nav class="hidden md:flex gap-gutter font-label-mono-sm text-label-mono-sm uppercase tracking-widest">
+<a class="nav-link text-primary-fixed-dim hover:text-primary-fixed duration-300 transition-all hover:glow-primary active interactive-el" href="#work">WORK</a>
+<a class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el" href="#about">ABOUT</a>
+<a class="nav-link text-on-surface-variant hover:text-primary-fixed duration-300 transition-all hover:glow-primary interactive-el" href="#contact">CONTACT</a>
+</nav>
+<div class="font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-widest">
+            [ONLINE]
+        </div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop pt-32 pb-16">
+<!-- Radial Glow -->
+<div class="radial-glow w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
+<!-- Technical Labels -->
+<div class="absolute top-32 left-margin-mobile md:left-margin-desktop font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
+                [SYS.VER: 10.4.2]
+            </div>
+<div class="absolute top-32 right-margin-mobile md:right-margin-desktop text-right font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase flex flex-col gap-1">
+<span>[LAT: 51.2194 N]</span>
+<span>[LNG: 4.4025 E]</span>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow text-center z-10 relative">
+<h1 class="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter mb-6 warp-element rgb-split-hover interactive-el" data-text="DAMIAN MATTHEEUW">
+                    DAMIAN<br/>MATTHEEUW
+                </h1>
+<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant tracking-widest uppercase">
+                    FRONT-END ARCHITECT // CINEMATIC VISION
+                </p>
+</div>
+<div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-widest animate-pulse interactive-el cursor-pointer">
+                SCROLL TO DECRYPT
+            </div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 pointer-events-none -z-10">
+<div class="w-full h-full border-l border-r technical-line mx-margin-mobile md:mx-margin-desktop border-dashed opacity-20"></div>
+</div>
+</section>
+<!-- Work Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="work">
+<!-- Radial Glow -->
+<div class="radial-glow w-[600px] h-[600px] top-0 left-0 -translate-x-1/4 -translate-y-1/4 opacity-30" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
+<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SELECTED WORK</h2>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[01/04]</span>
+</div>
+<div class="grid grid-cols-1 gap-16 mb-16">
+<!-- Project 1 -->
+<a class="group block project-card interactive-el" href="#">
+<div class="relative w-full aspect-video overflow-hidden rounded-xl bg-surface-container mb-6">https://lh3.googleusercontent.com/aida/AP1WRLseE7Ib-xsHM4Vk0w3CO2ieK6A2tgYu7JB3VC--Zb7B1TPfuDZMBnc6eTBbQN79gSqIGmok6Hs5FnfbcLCvACJWLT2wxNR-OLYAd61kCD5axpN471mGemd3_9F6J4as_xrEHTegICyCXX_ej7r59jXxqyCH3zjTrJx3OaDXGcGdveK1m9QaqBTuariKnBHihF3WdS0BnOYbMHXy2A6zMufnDwFSGQb2xZ9pgbi0DzkFfFlSwHzk-B3QtCI</div>
+<div class="project-info flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
+<span>[01/09]</span>
+<span>Turnkey site</span>
+</div>
+<div class="font-headline-lg text-4xl text-primary uppercase group-hover:glow-primary transition-all">
+                            AIR / CORD
+                        </div>
+</div>
+<div class="flex flex-col items-start md:items-end w-full md:w-1/3">
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mb-4 md:text-right">
+                            A CREATIVE STUDIO THAT DEVELOPS HIGH-END DIGITAL EXPERIENCES.
+                        </div>
+<div class="flex items-center gap-2">
+<div class="h-px bg-primary hover-line"></div>
+<span class="material-symbols-outlined text-primary hover-arrow">arrow_forward</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Project 2 & 3 in a row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Project 2 -->
+<a class="group block project-card interactive-el" href="#">
+<div class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6">
+<img alt="Cinematic low angle shot of a futuristic brutalist concrete structure at night, sharp edges, monochromatic, soft moonlight, deep shadows, architectural photography. For MAXILLA project hero." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu0yxZ5eGcX9XLNCA6g57Bk2nlxbFXvO0f5k5-DybtJLfDzFvfDbPEHfhtlLLqgAVgSJO3-KyOJwW_sFwwEUxg1RTvqYeCSDnhQ_BKccTnp3Sc3jMLcjBpeyiqcv-dTHdWKIPG7p-kzs_eKIZYZvIkqfrl6W0toYuU3YUM5k_ZRmCyS27xvtRP5dYBm-8pi4ohVYbmUf6V-KomsC0c6LfotY-XH5hJoccletdViFqEI7I6RIpqKyWM5TlgknsYpdCQrn2sMDVGpiJe"/>
+</div>
+<div class="project-info flex flex-col justify-between items-start gap-4">
+<div class="w-full">
+<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
+<span>[02/09]</span>
+<span>Corporate site</span>
+</div>
+<div class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full">
+<span>MAXILLA</span>
+<span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
+</div>
+</div>
+</div>
+</a>
+<!-- Project 3 -->
+<a class="group block project-card interactive-el" href="#">
+<div class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container mb-6">
+<img alt="Macro photography of a complex liquid metal simulation, chrome textures, flowing mercury, high contrast black and white, abstract tech, cinematic lighting. For EMOTION project hero." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH_KqmZq7EcaWrN_gpgeI3aGybV16dW9yczu2rmqsDeekjiab1fCvdr5jabAt9Cxt4N9_vzYqfgN6w9qPEiQrOAQs_AooRdMeWR9Q009_x-S3GrUwKM-SKNZLe1m4jm-CXAXXr9ipNGfdr9UHlnRcqPT42AicHrDxDkYD4vKGURNqvjeAhqJ4fthpHGsgIvNaHzzpm30Hi_fDxMfAhx0lLiOa1ywIi1q2a87ybtlktt3W5iXqxRnLBXYiLxAKKE7LG18jTicWnZ5IK"/>
+</div>
+<div class="project-info flex flex-col justify-between items-start gap-4">
+<div class="w-full">
+<div class="flex items-center gap-4 mb-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">
+<span>[03/09]</span>
+<span>Creative Portfolio</span>
+</div>
+<div class="font-headline-lg text-3xl text-primary uppercase group-hover:glow-primary transition-all flex justify-between items-center w-full">
+<span>EMOTION</span>
+<span class="material-symbols-outlined text-primary hover-arrow">arrow_outward</span>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="about"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary opacity-5 rounded-full pointer-events-none -z-10"></div>
+<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SHORTLY ABOUT MYSELF</h2>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[02/04]</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-8">
+<p class="font-body-md text-2xl leading-relaxed text-on-surface mb-12">
+            Damian Mattheeuw, operating at the intersection of logical systems and visual narrative. As a front-end architect, I build structural frameworks; as a photographer, I capture the world within them.
+        </p>
+<div class="flex flex-col gap-4 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">
+<div class="border-l border-primary pl-4">// STRUCTURAL INTEGRITY FIRST</div>
+<div class="border-l border-primary pl-4">// CINEMATIC AESTHETICS</div>
+<div class="border-l border-primary pl-4">// PERFORMANCE ORIENTED</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="skills">
+<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SKILLS</h2>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[03/04]</span>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div class="col-span-2 md:col-span-2 lg:col-span-2 row-span-2 border technical-line p-8 flex flex-col justify-end bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-xs text-on-surface-variant mb-2">[CORE]</span>
+<span class="font-headline-lg text-3xl text-primary group-hover:text-primary transition-colors">REACT / NEXT.JS</span>
+</div>
+<div class="col-span-1 md:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[GSAP]</span>
+</div>
+<div class="col-span-1 md:col-span-1 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[THREE.JS / WEBGL]</span>
+</div>
+<div class="col-span-2 md:col-span-2 lg:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[TYPESCRIPT]</span>
+</div>
+<div class="col-span-1 md:col-span-1 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[TAILWIND CSS]</span>
+</div>
+<div class="col-span-1 md:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[FIGMA]</span>
+</div>
+<div class="col-span-2 md:col-span-2 lg:col-span-1 row-span-2 border technical-line p-8 flex flex-col justify-end bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-xs text-on-surface-variant mb-2">[VISUAL]</span>
+<span class="font-headline-lg text-2xl text-primary group-hover:text-primary transition-colors">PHOTOGRAPHY</span>
+</div>
+<div class="col-span-2 md:col-span-2 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
+<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[LIGHTROOM / CAPTURE ONE]</span>
+</div>
+</div>
+</section>
+<!-- Enfoque Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative">
+<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">ENFOQUE [OFF-WORK]</h2>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[04/04]</span>
+</div>
+<!-- Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Featured Image (Large) -->
+<div class="md:col-span-2 relative group aspect-[4/3] md:aspect-auto overflow-hidden border technical-line p-2 interactive-el rounded-xl">
+<img alt="High-contrast black and white architectural photography looking up at a brutalist concrete building. The sharp angles and repetitive grid patterns of the facade create a sense of imposing scale. The sky is completely blown out to pure white, emphasizing the starkness of the structure." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeOj16BpTDWIikFoYFfsjH7qfn36rh6n66vK8K8sjNdXFQLSX0FpN2q56zQDDK3MF2HgpFxzHRnAp7MwK5iwVaDujlQTIQGKLT95kJaVQz9Q9dlYBAVes751IJCIlOB_b08t9B5c04KMzH5MG0c4kPDCVwTJZxV-jI5Q_j2DXY_w0W04E0oSimzfnEGq2jIHuh1pGRB0nfYNE-uuUYjiHO5vwqnDIL-O06fPqxmSnvgMABzWMfzku_IQIiVubwTWxWh8E1_s27BMZv"/>
+<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        ISO: 400 // F/2.8 [LOG_045]
+                    </div>
+</div>
+<!-- Smaller Images Stack -->
+<div class="flex flex-col gap-4">
+<!-- Gallery Item 2 -->
+<div class="relative group aspect-square md:flex-1 overflow-hidden border technical-line p-2 interactive-el rounded-xl">
+<img alt="A close-up, abstract macro shot of crushed velvet fabric in deep charcoal grey. The lighting is extremely directional, highlighting the rich textures and creating deep, almost black shadows. The image feels tactile and luxurious, yet dark and moody." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQrANGg0iixn7GZPomHq-RJj-OFGXnBkgMoDpNBtshjiKSGRivXLktOCYMbcJUFIvjtwPT-xgMA625a7t-IWgyEQ7R0lnO0fMLHNZVnSVuUQCNtRG9vLQgUB8mE7vTOyFILZcI5EV-nToXk2Hxn3Jo3uF11AGkQcAFDLFPjRT5KPHTFfSZIFxb4wld_cePNPBEbIqFP40PQSnTkboFKywm0ySjZ822vvDb-1ooYqOjAiMk3qVodN6ZcNcwjNQs37ESTPjeLF_L6LQ9"/>
+<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            ISO: 800 // F/1.4 [LOG_046]
+                        </div>
+</div>
+<!-- Gallery Item 3 -->
+<div class="relative group aspect-square md:flex-1 overflow-hidden border technical-line p-2 interactive-el rounded-xl">
+<img alt="A stark, minimalist landscape featuring a solitary, dead tree standing against a featureless, overcast sky. The image is rendered in extreme high-contrast monochrome, giving it an etched, graphic quality. The mood is desolate and highly atmospheric." class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuE_x0awwVOeCnIJUlpFm0wf7cJNYSSgk3MgEXBovnyLjSUIwSQ9kbhsPu_TyFg0aTiSTfqioHz1Vw2R9n0CGst9ipB_veJyCycpZ17DGJURHrcB2bcKbvNfJwts7j5ifYVYcA0vdv1ltnZhscK-UvnUJG9svCoy61BNeprglVSN9-gtagmsfYNrzFRXphb_4G6nNwlz0TJYgjPDcZy7MV_ZCCDe8bsR9vEmYvjeseVOU378vN4x4NRNcGuTDjQaNL8iFYHGcAQ9e6"/>
+<div class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            ISO: 100 // F/8.0 [LOG_047]
+                        </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="relative w-full overflow-hidden bg-transparent px-margin-mobile md:px-margin-desktop py-32 border-t border-outline-variant border-dashed transition-all duration-300" id="contact">
+<div class="font-display-xl text-display-xl text-surface-variant opacity-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 select-none pointer-events-none whitespace-nowrap warp-element text-[20vw]">
+            GET IN TOUCH
+        </div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-16 relative z-10">
+<div class="flex flex-col gap-8 w-full">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element sr-only">GET IN TOUCH</h2>
+<div class="flex flex-col gap-4 font-headline-lg text-4xl md:text-7xl text-on-surface uppercase tracking-tight w-full">
+<a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit rgb-split-hover interactive-el" data-text="HELLO@ENFOQUE.COM" href="mailto:hello@enfoque.com">HELLO@ENFOQUE.COM</a>
+<div class="w-full h-px bg-outline-variant opacity-30 my-4"></div><a class="hover:text-primary hover:glow-primary transition-all duration-300 inline-block w-fit interactive-el text-2xl md:text-4xl" href="#">LINKEDIN // PROFILE</a>
+</div>
+</div>
+<div class="flex flex-col items-end gap-8 font-label-mono-xs text-label-mono-xs uppercase text-on-tertiary-fixed-variant text-right mt-auto">
+<span class="border border-outline-variant p-2 cursor-default bg-background/50 backdrop-blur-sm rounded-lg">[LAT: 51.2194 N // LNG: 4.4025 E]</span>
+<div>© 2024 ENFOQUE.<br/>ALL RIGHTS RESERVED.</div>
+</div>
+</div>
+</footer>
+<!-- Shader Implementation -->
+<script type="module">
+    const canvas = document.getElementById('shader-bg');
+    const gl = canvas.getContext('webgl');
+
+    if (gl) {
+        // Vertex Shader
+        const vsSource = `
+            attribute vec4 aVertexPosition;
+            varying vec2 v_texCoord;
+            void main() {
+                gl_Position = aVertexPosition;
+                v_texCoord = aVertexPosition.xy * 0.5 + 0.5;
+            }
+        `;
+
+        // Fragment Shader from DataStore
+        const fsSource = `
+            precision highp float;
+            varying vec2 v_texCoord;
+            uniform float u_time;
+            uniform vec2 u_resolution;
+
+            float noise(vec2 p) {
+                return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+            }
+
+            void main() {
+                vec2 uv = v_texCoord;
+                float n = noise(uv + u_time * 0.01);
+                
+                // Soft radial glows
+                vec2 center1 = vec2(0.2, 0.8);
+                vec2 center2 = vec2(0.8, 0.2);
+                float glow1 = smoothstep(0.5, 0.0, distance(uv, center1));
+                float glow2 = smoothstep(0.4, 0.0, distance(uv, center2));
+                
+                vec3 color = vec3(0.04, 0.04, 0.04); // Deep obsidian base
+                color += vec3(0.1, 0.08, 0.06) * glow1; // Warm glow
+                color += vec3(0.05, 0.07, 0.1) * glow2; // Cool glow
+                
+                // Film grain
+                color += (n - 0.5) * 0.03;
+                
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
+
+        // Compile Shader Function
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+        const shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        const programInfo = {
+            program: shaderProgram,
+            attribLocations: {
+                vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+            },
+            uniformLocations: {
+                time: gl.getUniformLocation(shaderProgram, 'u_time'),
+                resolution: gl.getUniformLocation(shaderProgram, 'u_resolution'),
+            },
+        };
+
+        const positions = [
+            -1.0,  1.0,
+             1.0,  1.0,
+            -1.0, -1.0,
+             1.0, -1.0,
+        ];
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+        function resizeCanvasToDisplaySize(canvas) {
+            const displayWidth  = canvas.clientWidth;
+            const displayHeight = canvas.clientHeight;
+            if (canvas.width  !== displayWidth || canvas.height !== displayHeight) {
+                canvas.width  = displayWidth;
+                canvas.height = displayHeight;
+            }
+        }
+
+        let then = 0;
+        function render(now) {
+            now *= 0.001;  // convert to seconds
+
+            resizeCanvasToDisplaySize(gl.canvas);
+            gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+            gl.useProgram(programInfo.program);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+
+            gl.uniform1f(programInfo.uniformLocations.time, now);
+            gl.uniform2f(programInfo.uniformLocations.resolution, gl.canvas.width, gl.canvas.height);
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+    }
+</script>
+<script>
+    // Custom Cursor with Lerp
+    const cursor = document.getElementById('custom-cursor');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function updateCursor() {
+        // Lerp factor (lower is slower/smoother)
+        const amt = 0.15;
+        
+        cursorX += (mouseX - cursorX) * amt;
+        cursorY += (mouseY - cursorY) * amt;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        
+        requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+
+    document.querySelectorAll('.interactive-el, a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('interactive');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('interactive');
+        });
+    });
+</script>
+</body></html>
