@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="js/tailwind.config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&amp;family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
 <link href="css/styles.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative">
@@ -33,36 +33,27 @@
 <div id="smooth-wrapper">
 <div id="smooth-content">
 <main class="flex-grow">
-<!-- Hero Section -->
-<section class="relative min-h-screen flex flex-col justify-center px-margin-mobile md:px-margin-desktop pt-32 pb-16" data-hero-trail>
-<!-- Breathing radial glow behind the name (pure CSS, see .hero-breathe) -->
-<div class="hero-breathe"></div>
-<!-- Radial Glow -->
-<div class="radial-glow w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" style="background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(100,150,255,0.05) 40%, transparent 70%);"></div>
-<!-- Technical Labels -->
-<div class="absolute top-32 left-margin-mobile md:left-margin-desktop font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase" data-speed="1.15">
-                [SYS.VER: 10.4.2]
-            </div>
-<div class="absolute top-32 right-margin-mobile md:right-margin-desktop text-right font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase flex flex-col gap-1" data-speed="1.15">
-<span>[LAT: 51.2194 N]</span>
-<span>[LNG: 4.4025 E]</span>
-</div>
-<div class="flex flex-col justify-center flex-grow z-10 relative w-full">
-<h1 class="hero-name font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter warp-element interactive-el" data-speed="0.9">
-<span class="hero-name__line hero-name__line--left" data-split>DAMIAN</span>
-<span class="hero-rule"></span>
-<span class="hero-name__line hero-name__line--right" data-split>MATTHEEUW</span>
+<!-- Hero Section (editorial layout: big name + image, metadata bar) -->
+<section class="hero relative min-h-screen flex flex-col px-margin-mobile md:px-margin-desktop pt-32 pb-10" data-hero-trail>
+<div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<!-- Left: short description + giant stacked name -->
+<div class="md:col-span-7 relative z-10">
+<p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">Building digital experiences and capturing the world through a lens. Front-end developer and photographer.</p>
+<h1 class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[16vw] md:text-[11vw] interactive-el">
+<span class="block" data-split>DAMIAN</span>
+<span class="block" data-split>MATTHEEUW</span>
 </h1>
-<p class="hero-role font-label-mono-sm text-label-mono-sm text-on-surface-variant tracking-widest uppercase mt-8 text-center">
-                    FRONT-END ARCHITECT // CINEMATIC VISION
-                </p>
 </div>
-<div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-widest animate-pulse interactive-el cursor-pointer">
-                SCROLL TO DECRYPT
-            </div>
-<!-- Grid Lines -->
-<div class="absolute inset-0 pointer-events-none -z-10">
-<div class="w-full h-full border-l border-r technical-line mx-margin-mobile md:mx-margin-desktop border-dashed opacity-20"></div>
+<!-- Right: portrait image -->
+<div class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm">
+<img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/people1.jpg"/>
+</div>
+</div>
+<!-- Bottom metadata bar -->
+<div class="relative z-10 flex justify-between items-center border-t technical-line pt-4 mt-6 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">
+<span>ANTWERP, BE</span>
+<span id="hero-date">&mdash;</span>
+<span id="hero-time">--:--</span>
 </div>
 </section>
 <!-- Work Section -->

@@ -485,3 +485,23 @@
         travelled = 0;
     });
 })();
+
+/* ------------------------------------------------------------------ */
+/* Hero — live date / time in the bottom metadata bar                  */
+/* ------------------------------------------------------------------ */
+(function initHeroClock() {
+    const dateEl = document.getElementById('hero-date');
+    const timeEl = document.getElementById('hero-time');
+    if (!dateEl && !timeEl) return;
+
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    const tick = () => {
+        const now = new Date();
+        if (dateEl) dateEl.textContent = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+        if (timeEl) {
+            timeEl.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        }
+    };
+    tick();
+    setInterval(tick, 1000);
+})();
