@@ -152,7 +152,7 @@ body {
   position: absolute;
   z-index: 20; /* above the hero text (z-10), below the fixed nav (z-40) */
   pointer-events: none;
-  width: 180px;
+  width: 130px;
   height: auto;
   border-radius: 4px;
   transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(0.3);

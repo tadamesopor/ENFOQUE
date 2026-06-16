@@ -430,15 +430,19 @@
   if (!hero) return;
   if (window.matchMedia("(hover: none)").matches) return;
 
-  // Photos cycled in order — swap these for any files in assets/img/.
-  const photos = ["people1", "object1", "cat1", "people2", "object3", "cat5", "people3", "object5"].map(
-    (name) => `assets/img/${name}.jpg`,
-  );
+  // Every cat / people / object / animal photo, interleaved for variety.
+  const photos = [
+    "people1", "cat1", "object1", "animal",
+    "people2", "cat1.2", "object2", "cat3",
+    "people3", "object3", "cat3.2", "object",
+    "people4", "cat5", "object4", "cat6",
+    "object5", "cat7", "cat-old",
+  ].map((name) => `assets/img/${name}.jpg`);
   let index = 0;
 
   // Density is driven by cursor speed: we spawn a photo every STEP pixels of
   // travel, so moving fast drops many and moving slowly drops few.
-  const STEP = 55;
+  const STEP = 90;
   let lastX = null;
   let lastY = null;
   let travelled = 0;
