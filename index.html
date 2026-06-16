@@ -305,75 +305,76 @@
 <button class="gallery-filter interactive-el" data-filter="objects">OBJECTS</button>
 <button class="gallery-filter interactive-el" data-filter="people">PEOPLE</button>
 </div>
-<!-- Photo Grid -->
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-gallery data-warp="both">
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat1.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 01</figcaption>
+<!-- Horizontal drag-scroll photo strip. Keeps data-gallery so the category
+     filter above still works; drag to scroll on desktop, stacks on mobile. -->
+<div class="photo-strip no-scrollbar interactive-el" data-strip data-gallery>
+<figure class="photo-strip__item is-featured" data-category="cats">
+<img alt="cats shoot 01" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat1.jpg"/>
+<figcaption class="photo-strip__label">[01]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat1.2.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 02</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 02" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat1.2.jpg"/>
+<figcaption class="photo-strip__label">[02]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat3.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 03</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 03" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat3.jpg"/>
+<figcaption class="photo-strip__label">[03]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat3.2.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 04</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 04" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat3.2.jpg"/>
+<figcaption class="photo-strip__label">[04]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 05" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat5.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 05</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 05" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat5.jpg"/>
+<figcaption class="photo-strip__label">[05]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 06" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat6.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 06</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 06" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat6.jpg"/>
+<figcaption class="photo-strip__label">[06]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 07" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat7.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 07</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 07" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat7.jpg"/>
+<figcaption class="photo-strip__label">[07]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="cats">
-<img alt="Cats shoot 08" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/cat-old.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">CATS / 08</figcaption>
+<figure class="photo-strip__item" data-category="cats">
+<img alt="cats shoot 08" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/cat-old.jpg"/>
+<figcaption class="photo-strip__label">[08]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
-<img alt="Objects shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/object1.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 01</figcaption>
+<figure class="photo-strip__item" data-category="objects">
+<img alt="objects shoot 09" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object1.jpg"/>
+<figcaption class="photo-strip__label">[09]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
-<img alt="Objects shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/object2.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 02</figcaption>
+<figure class="photo-strip__item" data-category="objects">
+<img alt="objects shoot 10" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object2.jpg"/>
+<figcaption class="photo-strip__label">[10]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
-<img alt="Objects shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/object3.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 03</figcaption>
+<figure class="photo-strip__item" data-category="objects">
+<img alt="objects shoot 11" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object3.jpg"/>
+<figcaption class="photo-strip__label">[11]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
-<img alt="Objects shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/object4.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 04</figcaption>
+<figure class="photo-strip__item" data-category="objects">
+<img alt="objects shoot 12" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object4.jpg"/>
+<figcaption class="photo-strip__label">[12]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="objects">
-<img alt="Objects shoot 05" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/object5.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">OBJECTS / 05</figcaption>
+<figure class="photo-strip__item" data-category="objects">
+<img alt="objects shoot 13" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/object5.jpg"/>
+<figcaption class="photo-strip__label">[13]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
-<img alt="People shoot 01" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/people1.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 01</figcaption>
+<figure class="photo-strip__item" data-category="people">
+<img alt="people shoot 14" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people1.jpg"/>
+<figcaption class="photo-strip__label">[14]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
-<img alt="People shoot 02" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/people2.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 02</figcaption>
+<figure class="photo-strip__item" data-category="people">
+<img alt="people shoot 15" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people2.jpg"/>
+<figcaption class="photo-strip__label">[15]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
-<img alt="People shoot 03" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/people3.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 03</figcaption>
+<figure class="photo-strip__item" data-category="people">
+<img alt="people shoot 16" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people3.jpg"/>
+<figcaption class="photo-strip__label">[16]</figcaption>
 </figure>
-<figure class="relative group aspect-square overflow-hidden border technical-line p-2 interactive-el rounded-xl" data-category="people">
-<img alt="People shoot 04" class="w-full h-full object-cover hover-desaturate group-hover:scale-105 transition-transform duration-700 rounded-lg" decoding="async" loading="lazy" src="assets/img/people4.jpg"/>
-<figcaption class="absolute bottom-4 left-4 font-label-mono-xs text-label-mono-xs text-primary bg-background/80 backdrop-blur px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">PEOPLE / 04</figcaption>
+<figure class="photo-strip__item" data-category="people">
+<img alt="people shoot 17" class="photo-strip__img" decoding="async" loading="lazy" src="assets/img/people4.jpg"/>
+<figcaption class="photo-strip__label">[17]</figcaption>
 </figure>
 </div>
 </section>

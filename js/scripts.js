@@ -359,3 +359,33 @@
         });
     }
 })();
+
+/* ------------------------------------------------------------------ */
+/* Off-work — click-and-drag horizontal scrolling for the photo strip  */
+/* ------------------------------------------------------------------ */
+(function initPhotoStrip() {
+    const strip = document.querySelector('[data-strip]');
+    if (!strip) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    strip.addEventListener('mousedown', (e) => {
+        isDown = true;
+        strip.classList.add('is-dragging');
+        startX = e.pageX;
+        scrollStart = strip.scrollLeft;
+    });
+    const stop = () => {
+        isDown = false;
+        strip.classList.remove('is-dragging');
+    };
+    strip.addEventListener('mouseleave', stop);
+    strip.addEventListener('mouseup', stop);
+    strip.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        strip.scrollLeft = scrollStart - (e.pageX - startX);
+    });
+})();
