@@ -326,3 +326,50 @@ body {
     font-family: 'Space Mono', monospace;
     font-size: 0.9rem;
 }
+
+/* ============================================================ */
+/* About section                                               */
+/* ============================================================ */
+
+/* Cursor photo-trail images (spawned in JS, then fade out and remove) */
+.about-trail__img {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+    transition: opacity 0.6s ease;
+    will-change: opacity;
+}
+.about-trail__img.is-out {
+    opacity: 0;
+}
+
+/* Sticky crossfading image column */
+.about-sticky {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+@media (min-width: 768px) {
+    .about-sticky {
+        aspect-ratio: auto;
+        height: 80vh;
+    }
+}
+.about-sticky__img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+.about-sticky__img.is-active {
+    opacity: 1;
+}

@@ -296,3 +296,66 @@
         }, { passive: true });
     }
 })();
+
+/* ------------------------------------------------------------------ */
+/* About — cursor photo-trail + pinned crossfading image column        */
+/* ------------------------------------------------------------------ */
+(function initAbout() {
+    const isTouch = window.matchMedia('(hover: none)').matches;
+
+    // Part 1: spawn a small rotated photo at the cursor on mousemove, fade it
+    // out and remove it. Throttled to ~80ms and skipped entirely on touch.
+    const trail = document.querySelector('[data-trail]');
+    if (trail && !isTouch) {
+        const photos = ['people1', 'people2', 'people3', 'people4', 'object1', 'cat5']
+            .map((name) => `assets/img/${name}.jpg`);
+        let lastSpawn = 0;
+
+        trail.addEventListener('mousemove', (e) => {
+            const now = performance.now();
+            if (now - lastSpawn < 80) return;
+            lastSpawn = now;
+
+            const rect = trail.getBoundingClientRect();
+            const img = document.createElement('div');
+            const size = 80 + Math.random() * 40; // 80–120px
+            img.className = 'about-trail__img';
+            img.style.width = size + 'px';
+            img.style.height = size * 1.25 + 'px';
+            img.style.left = e.clientX - rect.left + 'px';
+            img.style.top = e.clientY - rect.top + 'px';
+            img.style.setProperty('--r', Math.random() * 30 - 15 + 'deg');
+            img.style.backgroundImage = `url('${photos[Math.floor(Math.random() * photos.length)]}')`;
+            trail.appendChild(img);
+
+            setTimeout(() => img.classList.add('is-out'), 800);
+            setTimeout(() => img.remove(), 1500);
+        });
+    }
+
+    // Part 2: pin the image column and switch the active image by scroll
+    // progress through the story. Pinning is desktop-only (ScrollSmoother
+    // breaks position:sticky, so we pin via ScrollTrigger instead).
+    const sticky = document.querySelector('[data-about-sticky]');
+    const story = document.querySelector('[data-about-story]');
+    if (sticky && story && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        const imgs = Array.from(sticky.querySelectorAll('.about-sticky__img'));
+        const setActive = (progress) => {
+            const idx = Math.min(imgs.length - 1, Math.floor(progress * imgs.length));
+            imgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
+        };
+
+        const mm = gsap.matchMedia();
+        mm.add('(min-width: 768px)', () => {
+            const st = ScrollTrigger.create({
+                trigger: story,
+                start: 'top 20%',
+                end: 'bottom 80%',
+                pin: sticky,
+                pinSpacing: false,
+                onUpdate: (self) => setActive(self.progress),
+            });
+            return () => st.kill();
+        });
+    }
+})();

@@ -138,20 +138,33 @@
 </div>
 </section>
 <!-- About Section -->
-<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="about"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary opacity-5 rounded-full pointer-events-none -z-10"></div>
-<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SHORTLY ABOUT MYSELF</h2>
-<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[02/04]</span>
+<section class="relative" id="about">
+<!-- Part 1: full-screen heading with a cursor photo-trail (js/scripts.js).
+     Trail images spawn into this container on mousemove; disabled on touch. -->
+<div class="about-trail relative min-h-screen flex items-center justify-center overflow-hidden px-margin-mobile md:px-margin-desktop" data-trail>
+<h2 class="relative pointer-events-none font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl text-primary uppercase tracking-tighter text-center leading-none">SHORTLY<br/>ABOUT MYSELF</h2>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-<div class="md:col-span-8">
-<p class="font-body-md text-2xl leading-relaxed text-on-surface mb-12">
-            Damian Mattheeuw, operating at the intersection of logical systems and visual narrative. As a front-end architect, I build structural frameworks; as a photographer, I capture the world within them.
+<!-- Part 2: story text beside a sticky image column. The column is pinned and
+     its images crossfade as you scroll the text (ScrollTrigger, desktop only). -->
+<div class="px-margin-mobile md:px-margin-desktop pb-section-gap grid grid-cols-1 md:grid-cols-12 gap-gutter items-start" data-about-story>
+<div class="md:col-span-7">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">[02/04]</span>
+<p class="font-body-md text-2xl leading-relaxed text-on-surface mt-6 mb-12">
+            Damian Mattheeuw, operating at the intersection of front-end development and visual storytelling. Studying at Fontys University of Applied Sciences, I build structural frameworks and capture the world within them.
         </p>
 <div class="flex flex-col gap-4 font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">
-<div class="border-l border-primary pl-4">// STRUCTURAL INTEGRITY FIRST</div>
-<div class="border-l border-primary pl-4">// CINEMATIC AESTHETICS</div>
-<div class="border-l border-primary pl-4">// PERFORMANCE ORIENTED</div>
+<div class="border-l border-primary pl-4">// FRONT-END DEVELOPER</div>
+<div class="border-l border-primary pl-4">// PHOTOGRAPHER</div>
+<div class="border-l border-primary pl-4">// CREATIVE AGENCY FOCUSED</div>
+</div>
+</div>
+<div class="md:col-span-5 mt-12 md:mt-0">
+<!-- Swap these src paths for your preferred shots from assets/img/ -->
+<div class="about-sticky" data-about-sticky>
+<div class="about-sticky__img is-active" style="background-image: url('assets/img/people1.jpg');"></div>
+<div class="about-sticky__img" style="background-image: url('assets/img/object3.jpg');"></div>
+<div class="about-sticky__img" style="background-image: url('assets/img/cat3.jpg');"></div>
+<div class="about-sticky__img" style="background-image: url('assets/img/people4.jpg');"></div>
 </div>
 </div>
 </div>
