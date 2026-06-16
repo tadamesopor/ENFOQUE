@@ -157,38 +157,125 @@
 </div>
 </section>
 <!-- Skills Section -->
-<section class="px-margin-mobile md:px-margin-desktop py-section-gap relative" id="skills">
-<div class="flex justify-between items-end mb-16 border-b technical-line border-dashed pb-4">
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase warp-element">SKILLS</h2>
+<section class="relative py-section-gap overflow-hidden" id="skills">
+<!-- Full-bleed auto-scrolling marquee. It loops continuously and flips
+     direction with the scroll direction (handled in js/scripts.js). -->
+<div class="skills-marquee border-y technical-line py-4 mb-16" aria-hidden="true">
+<div class="skills-marquee__track font-display-xl text-primary uppercase tracking-tight text-[12vw] leading-none">
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+<span class="skills-marquee__item">MY SKILLS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;</span>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-center mb-12">
+<p class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-widest">These are my most significant skills</p>
 <span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">[03/04]</span>
 </div>
-<!-- Bento Grid -->
-<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-<div class="col-span-2 md:col-span-2 lg:col-span-2 row-span-2 border technical-line p-8 flex flex-col justify-end bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-xs text-on-surface-variant mb-2">[CORE]</span>
-<span class="font-headline-lg text-3xl text-primary group-hover:text-primary transition-colors">REACT / NEXT.JS</span>
+<!-- Skill cards. Each has a hidden dark "reveal" layer that grows from the
+     cursor entry point as an expanding circle (see .skill-card in styles.css). -->
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">REACT / NEXT.JS</h3>
+<p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-1 md:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[GSAP]</span>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">REACT / NEXT.JS</h3>
+<p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-1 md:col-span-1 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[THREE.JS / WEBGL]</span>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">GSAP</h3>
+<p class="skill-card__desc">Creating high-performance animations and scroll-triggered interactions</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-2 md:col-span-2 lg:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[TYPESCRIPT]</span>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">GSAP</h3>
+<p class="skill-card__desc">Creating high-performance animations and scroll-triggered interactions</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-1 md:col-span-1 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[TAILWIND CSS]</span>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">THREE.JS / WEBGL</h3>
+<p class="skill-card__desc">3D graphics and immersive web experiences</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-1 md:col-span-1 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[FIGMA]</span>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">THREE.JS / WEBGL</h3>
+<p class="skill-card__desc">3D graphics and immersive web experiences</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-2 md:col-span-2 lg:col-span-1 row-span-2 border technical-line p-8 flex flex-col justify-end bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-xs text-on-surface-variant mb-2">[VISUAL]</span>
-<span class="font-headline-lg text-2xl text-primary group-hover:text-primary transition-colors">PHOTOGRAPHY</span>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">FIGMA</h3>
+<p class="skill-card__desc">UI design, prototyping, and design systems</p>
+<span class="skill-card__mark">&mdash;</span>
 </div>
-<div class="col-span-2 md:col-span-2 lg:col-span-2 border technical-line p-6 flex items-center justify-center bg-surface-container-lowest/50 backdrop-blur-sm bento-card group interactive-el rounded-xl">
-<span class="font-label-mono-sm text-on-surface group-hover:text-primary transition-colors">[LIGHTROOM / CAPTURE ONE]</span>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">FIGMA</h3>
+<p class="skill-card__desc">UI design, prototyping, and design systems</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">PHOTOGRAPHY</h3>
+<p class="skill-card__desc">Visual direction and image capture</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">PHOTOGRAPHY</h3>
+<p class="skill-card__desc">Visual direction and image capture</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">TAILWIND CSS</h3>
+<p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">TAILWIND CSS</h3>
+<p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">TYPESCRIPT</h3>
+<p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">TYPESCRIPT</h3>
+<p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+</article>
+<article class="skill-card interactive-el">
+<div class="skill-card__face">
+<h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
+<p class="skill-card__desc">Photo editing and color grading</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+<div class="skill-card__reveal" aria-hidden="true">
+<h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
+<p class="skill-card__desc">Photo editing and color grading</p>
+<span class="skill-card__mark">&mdash;</span>
+</div>
+</article>
 </div>
 </div>
 </section>

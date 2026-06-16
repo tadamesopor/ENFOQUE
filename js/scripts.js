@@ -259,3 +259,40 @@
         },
     });
 })();
+
+/* ------------------------------------------------------------------ */
+/* Skills — expanding-circle card hover + scroll-reactive marquee      */
+/* ------------------------------------------------------------------ */
+(function initSkills() {
+    // Card reveal: set the circle origin (--x / --y) to where the cursor
+    // enters/leaves so the dark layer grows from / collapses to that point.
+    document.querySelectorAll('.skill-card').forEach((card) => {
+        const setOrigin = (e) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--x', ((e.clientX - r.left) / r.width) * 100 + '%');
+            card.style.setProperty('--y', ((e.clientY - r.top) / r.height) * 100 + '%');
+        };
+        card.addEventListener('mouseenter', setOrigin);
+        card.addEventListener('mouseleave', setOrigin);
+    });
+
+    // Marquee: it auto-scrolls; here we just flip its direction to match the
+    // scroll direction. ScrollTrigger is used because ScrollSmoother makes the
+    // native window scroll event unreliable; fall back to it if GSAP is absent.
+    const track = document.querySelector('.skills-marquee__track');
+    if (!track) return;
+
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.create({
+            onUpdate: (self) => {
+                track.style.animationDirection = self.direction === 1 ? 'normal' : 'reverse';
+            },
+        });
+    } else {
+        let last = window.scrollY;
+        window.addEventListener('scroll', () => {
+            track.style.animationDirection = window.scrollY > last ? 'normal' : 'reverse';
+            last = window.scrollY;
+        }, { passive: true });
+    }
+})();
