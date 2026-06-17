@@ -262,6 +262,71 @@
 })();
 
 /* ------------------------------------------------------------------ */
+/* GitHub activity — latest commits from a public repo (no API key)    */
+/* ------------------------------------------------------------------ */
+(function initGithubActivity() {
+  const list = document.querySelector("[data-gh-commits]");
+  if (!list) return;
+
+  const REPO = "skarolinax/atlas-animation";
+  const URL = `https://api.github.com/repos/${REPO}/commits?per_page=5`;
+
+  // Short "x ago" relative time.
+  const timeAgo = (date) => {
+    const seconds = Math.max(0, Math.floor((Date.now() - new Date(date).getTime()) / 1000));
+    const units = [
+      ["y", 31536000],
+      ["mo", 2592000],
+      ["w", 604800],
+      ["d", 86400],
+      ["h", 3600],
+      ["m", 60],
+    ];
+    for (const [label, secs] of units) {
+      const value = Math.floor(seconds / secs);
+      if (value >= 1) return `${value}${label} ago`;
+    }
+    return "just now";
+  };
+
+  const escapeHtml = (str) => str.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+  const setState = (text, isError) => {
+    list.innerHTML = `<li class="gh-activity__state ${isError ? "text-error" : "text-outline"}">${text}</li>`;
+  };
+
+  fetch(URL)
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then((commits) => {
+      if (!Array.isArray(commits) || commits.length === 0) {
+        setState("// no recent commits", false);
+        return;
+      }
+      list.innerHTML = commits
+        .slice(0, 5)
+        .map((c) => {
+          const message = escapeHtml(c.commit.message.split("\n")[0]);
+          const when = timeAgo(c.commit.author && c.commit.author.date);
+          const href = c.html_url || `https://github.com/${REPO}`;
+          return (
+            `<li class="gh-activity__item border-b border-outline-variant border-dashed">` +
+            `<a class="gh-activity__link text-on-surface-variant hover:text-primary transition-colors interactive-el" href="${href}" target="_blank" rel="noopener">` +
+            `<span class="gh-activity__msg">${message}</span>` +
+            `<span class="gh-activity__time text-outline">${when}</span>` +
+            `</a></li>`
+          );
+        })
+        .join("");
+    })
+    .catch(() => {
+      setState("// failed to load activity", true);
+    });
+})();
+
+/* ------------------------------------------------------------------ */
 /* Skills — expanding-circle card hover + scroll-reactive marquee      */
 /* ------------------------------------------------------------------ */
 (function initSkills() {

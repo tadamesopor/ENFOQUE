@@ -118,6 +118,42 @@ body {
   display: flex;
 }
 
+/* ============================================================ */
+/* GitHub activity widget (live commits from the public API)   */
+/* ============================================================ */
+.gh-activity {
+  font-family: "JetBrains Mono", monospace;
+}
+.gh-activity__label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+.gh-activity__list {
+  font-size: 12px;
+}
+.gh-activity__link {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+.gh-activity__msg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gh-activity__msg::before {
+  content: "› ";
+}
+.gh-activity__time {
+  flex-shrink: 0;
+}
+.gh-activity__state {
+  padding: 0.5rem 0;
+  font-size: 12px;
+}
+
 /* RGB split hover */
 .rgb-split-hover {
   position: relative;
