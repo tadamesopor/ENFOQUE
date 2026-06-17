@@ -7,6 +7,16 @@
     <title>Serieus?! Virtual Production - ENFOQUE STUDIO</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="js/tailwind.config.js"></script>
+    <script>
+      // Apply the saved theme before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          document.documentElement.classList.remove("dark", "light");
+          document.documentElement.classList.add(t === "light" ? "light" : "dark");
+        } catch (e) {}
+      })();
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
@@ -44,7 +54,12 @@
         <a class="hover:text-primary transition-colors duration-300" href="index.html#about">ABOUT</a>
         <a class="hover:text-primary transition-colors duration-300" href="index.html#contact">CONTACT</a>
       </div>
-      <div class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-primary">[ONLINE]</div>
+      <div class="flex items-center gap-4">
+        <button class="text-primary interactive-el" data-theme-toggle aria-label="Toggle light or dark theme">
+          <span class="material-symbols-outlined align-middle" data-theme-icon>light_mode</span>
+        </button>
+        <div class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-primary">[ONLINE]</div>
+      </div>
     </nav>
     <!-- Project Back Link (HUD) -->
     <div class="fixed top-32 left-margin-mobile md:left-margin-desktop z-40">
@@ -105,7 +120,7 @@
     >
       <!-- Two Column Layout -->
       <div
-        class="grid grid-cols-1 md:grid-cols-12 gap-gutter max-w-[1440px] mx-auto border-t border-[#262626] pt-12 relative"
+        class="grid grid-cols-1 md:grid-cols-12 gap-gutter max-w-[1440px] mx-auto border-t border-line pt-12 relative"
       >
         <!-- Section Marker -->
         <div
@@ -116,7 +131,7 @@
         <!-- Left: Description -->
         <div class="md:col-span-7 lg:col-span-6 md:col-start-2">
           <p
-            class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary text-balance border-l border-[#262626] pl-6 ml-[-25px]"
+            class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary text-balance border-l border-line pl-6 ml-[-25px]"
           >
             <!-- TODO: replace with the real Serieus?! write-up -->
             Virtual production work for Serieus?!. Short summary of the production, your role on set and the result goes
@@ -125,15 +140,15 @@
         </div>
         <!-- Right: Metadata -->
         <div class="md:col-span-4 lg:col-span-3 md:col-start-9 mt-12 md:mt-0 flex flex-col gap-8">
-          <div class="border-t border-[#262626] pt-4">
+          <div class="border-t border-line pt-4">
             <h3 class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase mb-2">YEAR</h3>
             <p class="font-body-md text-body-md text-on-surface"><!-- TODO -->20XX</p>
           </div>
-          <div class="border-t border-[#262626] pt-4">
+          <div class="border-t border-line pt-4">
             <h3 class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase mb-2">ROLE</h3>
             <p class="font-body-md text-body-md text-on-surface"><!-- TODO -->Your role</p>
           </div>
-          <div class="border-t border-[#262626] pt-4">
+          <div class="border-t border-line pt-4">
             <h3 class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase mb-2">TOOLS</h3>
             <p class="font-body-md text-body-md text-on-surface"><!-- TODO -->Tools / stack</p>
           </div>
@@ -154,7 +169,7 @@
       </div>
       <!-- Full Bleed Gallery Section -->
       <section class="mt-section-gap w-full">
-        <div class="w-full border-t border-b border-[#262626] py-1 relative">
+        <div class="w-full border-t border-b border-line py-1 relative">
           <div
             class="absolute -top-3 left-margin-mobile md:left-margin-desktop bg-background px-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant z-10"
           >
@@ -163,7 +178,7 @@
           <div class="flex overflow-x-auto gap-1 no-scrollbar pb-4 snap-x">
             <!-- Gallery Item 1 -->
             <div
-              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-[#262626]"
+              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-line"
             >
               <img
                 alt="Serieus?! virtual production still"
@@ -178,7 +193,7 @@
             </div>
             <!-- Gallery Item 2 -->
             <div
-              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-[#262626]"
+              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-line"
             >
               <img
                 alt="Serieus?! virtual production still"
@@ -193,7 +208,7 @@
             </div>
             <!-- Gallery Item 3 -->
             <div
-              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-[#262626]"
+              class="min-w-[85vw] md:min-w-[60vw] h-[60vh] md:h-[80vh] flex-shrink-0 relative group snap-center border border-line"
             >
               <img
                 alt="Serieus?! virtual production still"
@@ -212,7 +227,7 @@
     </main>
     <!-- Next Project Teaser -->
     <section
-      class="w-full min-h-[50vh] bg-surface-container-lowest flex flex-col justify-center items-center py-section-gap relative border-t border-[#262626]"
+      class="w-full min-h-[50vh] bg-surface-container-lowest flex flex-col justify-center items-center py-section-gap relative border-t border-line"
     >
       <div
         class="absolute inset-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-surface-variant/10 to-transparent"

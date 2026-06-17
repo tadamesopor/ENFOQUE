@@ -7,6 +7,16 @@
     <title>Owen Bryce - ENFOQUE STUDIO</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="js/tailwind.config.js"></script>
+    <script>
+      // Apply the saved theme before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          document.documentElement.classList.remove("dark", "light");
+          document.documentElement.classList.add(t === "light" ? "light" : "dark");
+        } catch (e) {}
+      })();
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
@@ -44,7 +54,12 @@
         <a class="hover:text-primary transition-colors duration-300" href="index.html#about">ABOUT</a>
         <a class="hover:text-primary transition-colors duration-300" href="index.html#contact">CONTACT</a>
       </div>
-      <div class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-primary">[ONLINE]</div>
+      <div class="flex items-center gap-4">
+        <button class="text-primary interactive-el" data-theme-toggle aria-label="Toggle light or dark theme">
+          <span class="material-symbols-outlined align-middle" data-theme-icon>light_mode</span>
+        </button>
+        <div class="font-label-mono-sm text-label-mono-sm tracking-[0.2em] uppercase text-primary">[ONLINE]</div>
+      </div>
     </nav>
     <!-- Project Back Link (HUD) -->
     <div class="fixed top-32 left-margin-mobile md:left-margin-desktop z-40">

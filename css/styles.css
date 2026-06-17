@@ -1,21 +1,80 @@
 /* ENFOQUE — shared custom styles */
 
+/* ============================================================ */
+/* Theme tokens (channels, consumed via rgb(var(--c-x) / a)).   */
+/* Dark is the default; .light overrides them.                  */
+/* ============================================================ */
+:root,
+.dark {
+  --c-background: 20 19 19;
+  --c-surface: 20 19 19;
+  --c-surface-variant: 53 52 52;
+  --c-surface-container-lowest: 14 14 14;
+  --c-surface-container-low: 28 27 27;
+  --c-surface-container: 32 31 31;
+  --c-on-background: 229 226 225;
+  --c-on-surface: 229 226 225;
+  --c-on-surface-variant: 196 199 200;
+  --c-outline: 142 145 146;
+  --c-outline-variant: 68 71 72;
+  --c-line: 38 38 38;
+  --c-primary: 255 255 255;
+  --c-on-primary: 47 49 49;
+  --c-primary-fixed: 226 226 226;
+  --c-primary-fixed-dim: 198 198 199;
+  --c-secondary-container: 74 73 73;
+  --c-on-tertiary-fixed-variant: 71 71 70;
+  --c-error: 255 180 171;
+  /* skill cards: light card with a dark reveal in dark mode */
+  --skill-card-bg: 255 255 255;
+  --skill-card-fg: 10 10 10;
+  --skill-reveal-bg: 10 10 10;
+  --skill-reveal-fg: 255 255 255;
+}
+.light {
+  --c-background: 244 242 238;
+  --c-surface: 244 242 238;
+  --c-surface-variant: 30 28 25;
+  --c-surface-container-lowest: 235 231 222;
+  --c-surface-container-low: 237 233 224;
+  --c-surface-container: 230 226 216;
+  --c-on-background: 26 24 22;
+  --c-on-surface: 26 24 22;
+  --c-on-surface-variant: 90 87 81;
+  --c-outline: 138 135 127;
+  --c-outline-variant: 214 210 201;
+  --c-line: 219 215 206;
+  --c-primary: 20 19 19;
+  --c-on-primary: 244 242 238;
+  --c-primary-fixed: 40 37 34;
+  --c-primary-fixed-dim: 74 71 66;
+  --c-secondary-container: 200 195 185;
+  --c-on-tertiary-fixed-variant: 100 97 91;
+  --c-error: 186 26 26;
+  /* skill cards invert in light mode: dark card, light reveal */
+  --skill-card-bg: 26 24 22;
+  --skill-card-fg: 244 242 238;
+  --skill-reveal-bg: 244 242 238;
+  --skill-reveal-fg: 26 24 22;
+}
+
 body {
-  background-color: #141313;
-  color: #f5f5f5;
+  background-color: rgb(var(--c-background));
+  color: rgb(var(--c-on-background));
   overflow-x: hidden;
   cursor: none;
+  transition: background-color 0.4s ease;
 }
 ::selection {
-  background: #f5f5f5;
-  color: #0a0a0a;
+  background: rgb(var(--c-primary));
+  color: rgb(var(--c-on-primary));
 }
 
 .technical-line {
-  border-color: #262626;
+  border-color: rgb(var(--c-line));
 }
 .glow-primary {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 10px rgb(var(--c-primary) / 0.5);
 }
 .hover-desaturate {
   filter: grayscale(80%);
@@ -59,6 +118,11 @@ body {
   height: 100vh;
   z-index: -100;
   pointer-events: none;
+}
+/* The shader renders a dark obsidian field — hide it in light mode so the
+   light background shows through instead. */
+.light #shader-bg {
+  display: none;
 }
 
 /* Custom cursor */
@@ -107,7 +171,7 @@ body {
 /* Active section link (scroll-spy). Higher specificity than the Tailwind
    text-* utility, so it wins without !important. */
 .nav-link.active {
-  color: #ffffff;
+  color: rgb(var(--c-primary));
 }
 
 /* Mobile menu overlay — hidden until toggled open */
@@ -278,7 +342,7 @@ body {
   width: 100%;
   height: 1px;
   margin: 0.1em 0;
-  background: #8e9192;
+  background: rgb(var(--c-outline));
   opacity: 0.4;
 }
 /* Each character is wrapped in a span in JS for the load-in stagger */
@@ -365,14 +429,15 @@ body {
 /* 12-column technical grid background */
 .technical-grid {
   background-image:
-    linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--c-line)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--c-line)) 1px, transparent 1px);
   background-size: 8.333% 8.333%;
   background-position: center top;
 }
 
 /* Border helper */
 .border-technical {
-  border-color: #262626;
+  border-color: rgb(var(--c-line));
 }
 
 /* Hide scrollbar (horizontal galleries) */
@@ -439,8 +504,8 @@ body {
   overflow: hidden;
   min-height: 160px;
   border-radius: 0.5rem;
-  background: #ffffff;
-  color: #0a0a0a;
+  background: rgb(var(--skill-card-bg));
+  color: rgb(var(--skill-card-fg));
   cursor: none;
 }
 .skill-card__face,
@@ -454,8 +519,8 @@ body {
 /* The dark layer is clipped to a 0-radius circle at the cursor entry point
    (--x / --y, set in JS) and grows to cover the card on hover. */
 .skill-card__reveal {
-  background: #0a0a0a;
-  color: #ffffff;
+  background: rgb(var(--skill-reveal-bg));
+  color: rgb(var(--skill-reveal-fg));
   pointer-events: none;
   clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
   transition: clip-path 0.6s ease;
@@ -555,7 +620,7 @@ body {
   .offwork__left {
     width: 100% !important;
     border-right: 0 !important;
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid rgb(var(--c-line));
   }
   .offwork__track {
     flex-direction: column;

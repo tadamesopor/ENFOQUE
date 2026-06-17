@@ -655,3 +655,34 @@
     start();
   }
 })();
+
+/* ------------------------------------------------------------------ */
+/* Light / dark theme toggle (persisted in localStorage)               */
+/* The initial theme is set by an inline script in <head> to avoid a   */
+/* flash; here we just wire the toggle buttons and keep the icon set.  */
+/* ------------------------------------------------------------------ */
+(function initThemeToggle() {
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll("[data-theme-toggle]");
+  if (!buttons.length) return;
+
+  const icons = document.querySelectorAll("[data-theme-icon]");
+  const syncIcon = () => {
+    const isLight = root.classList.contains("light");
+    icons.forEach((i) => (i.textContent = isLight ? "dark_mode" : "light_mode"));
+  };
+
+  const setTheme = (theme) => {
+    root.classList.remove("dark", "light");
+    root.classList.add(theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (e) {}
+    syncIcon();
+  };
+
+  syncIcon();
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => setTheme(root.classList.contains("light") ? "dark" : "light")),
+  );
+})();
