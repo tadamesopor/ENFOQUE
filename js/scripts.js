@@ -380,7 +380,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   // The photo also changes as you scroll. Preload them so swaps don't flicker.
-  const photos = ["people2", "object3", "cat3", "people4"].map((name) => `assets/img/${name}.jpg`);
+  const photos = ["me2", "me3", "me4", "me5", "me6", "me7"].map((name) => `assets/img/${name}.jpeg`);
   photos.forEach((src) => {
     const pre = new Image();
     pre.src = src;
