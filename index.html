@@ -95,27 +95,42 @@
             data-hero-trail
           >
             <div class="flex-grow grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-              <!-- Left: short description + giant stacked name. z-20 so the
-                   name overlaps on top of the portrait image. -->
-              <div class="md:col-span-7 relative z-20">
-                <p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">
-                  Building digital experiences and capturing the world through a lens. Front-end developer and
-                  photographer.
-                </p>
-                <h1
-                  class="hero-name font-display-xl text-primary uppercase font-bold leading-[0.82] tracking-tighter text-[15vw] md:text-[12.5vw] whitespace-nowrap interactive-el"
-                  data-hero-parallax="14"
-                >
-                  <span class="block" data-split>DAMIAN</span>
-                  <span class="block" data-split>MATTHEEUW</span>
-                </h1>
-              </div>
-              <!-- Right: portrait image -->
+              <!-- Portrait image. Placed FIRST in the DOM (and pinned to the right
+                   columns via col-start) so the name, which comes after it, paints
+                   on top and can mix-blend against both it and the hero background.
+                   No z-index here: stacking is by source order, which keeps the
+                   blend able to see the background behind it. -->
               <div
-                class="md:col-span-5 relative z-10 h-[40vh] md:h-[72vh] overflow-hidden rounded-sm"
+                class="order-2 md:order-none md:col-span-5 md:col-start-8 md:row-start-1 relative h-[40vh] md:h-[72vh] overflow-hidden rounded-sm"
                 data-hero-parallax="-22"
               >
-                <img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/people1.jpg" />
+                <img alt="Damian Mattheeuw" class="w-full h-full object-cover" src="assets/img/me7.jpeg" />
+              </div>
+              <!-- Short description + giant stacked name (sits on top of the image). -->
+              <div class="order-1 md:order-none md:col-span-7 md:col-start-1 md:row-start-1 relative">
+                <p class="hero-role font-body-md text-base md:text-lg text-on-surface-variant max-w-sm mb-8 md:mb-12">
+                  Building cool stuff and seeing my world through a lens. Front-end developer and
+                  photographer.
+                </p>
+                <div class="relative">
+                  <h1
+                    class="hero-name uppercase font-bold leading-[0.82] tracking-tighter text-[15vw] md:text-[12.5vw] whitespace-nowrap interactive-el"
+                    data-hero-parallax="14"
+                  >
+                    <span class="block" data-split>DAMIAN</span>
+                    <span class="block" data-split>MATTHEEUW</span>
+                  </h1>
+                  <!-- Light-mode blue tint copy: multiply blends over the white name
+                       so only the letters crossing the photo turn blue (see styles.css). -->
+                  <h1
+                    class="hero-name hero-name--tint absolute inset-0 uppercase font-bold leading-[0.82] tracking-tighter text-[15vw] md:text-[12.5vw] whitespace-nowrap pointer-events-none"
+                    data-hero-parallax="14"
+                    aria-hidden="true"
+                  >
+                    <span class="block" data-split>DAMIAN</span>
+                    <span class="block" data-split>MATTHEEUW</span>
+                  </h1>
+                </div>
               </div>
             </div>
             <!-- Bottom metadata bar -->
@@ -327,53 +342,73 @@
               <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">REACT / NEXT.JS</h3>
-                    <p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+                    <h3 class="skill-card__title">HTML</h3>
+                    <p class="skill-card__desc">Semantic, accessible markup and document structure</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">REACT / NEXT.JS</h3>
-                    <p class="skill-card__desc">Building interactive UIs and full component-based applications</p>
+                    <h3 class="skill-card__title">HTML</h3>
+                    <p class="skill-card__desc">Semantic, accessible markup and document structure</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">GSAP</h3>
-                    <p class="skill-card__desc">
-                      Creating high-performance animations and scroll-triggered interactions
-                    </p>
+                    <h3 class="skill-card__title">CSS</h3>
+                    <p class="skill-card__desc">Responsive layouts, animation, and modern styling</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">GSAP</h3>
-                    <p class="skill-card__desc">
-                      Creating high-performance animations and scroll-triggered interactions
-                    </p>
+                    <h3 class="skill-card__title">CSS</h3>
+                    <p class="skill-card__desc">Responsive layouts, animation, and modern styling</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">THREE.JS / WEBGL</h3>
-                    <p class="skill-card__desc">3D graphics and immersive web experiences</p>
+                    <h3 class="skill-card__title">JAVASCRIPT</h3>
+                    <p class="skill-card__desc">Interactive behaviour and front-end logic</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">THREE.JS / WEBGL</h3>
-                    <p class="skill-card__desc">3D graphics and immersive web experiences</p>
+                    <h3 class="skill-card__title">JAVASCRIPT</h3>
+                    <p class="skill-card__desc">Interactive behaviour and front-end logic</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">FIGMA</h3>
-                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
+                    <h3 class="skill-card__title">THREE.JS</h3>
+                    <p class="skill-card__desc">3D graphics and immersive WebGL experiences</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">FIGMA</h3>
-                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
+                    <h3 class="skill-card__title">THREE.JS</h3>
+                    <p class="skill-card__desc">3D graphics and immersive WebGL experiences</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">BLENDER</h3>
+                    <p class="skill-card__desc">3D modelling, shading, and rendering</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">BLENDER</h3>
+                    <p class="skill-card__desc">3D modelling, shading, and rendering</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                </article>
+                <article class="skill-card interactive-el">
+                  <div class="skill-card__face">
+                    <h3 class="skill-card__title">UNREAL ENGINE</h3>
+                    <p class="skill-card__desc">Real-time 3D and virtual production scenes</p>
+                    <span class="skill-card__mark">&mdash;</span>
+                  </div>
+                  <div class="skill-card__reveal" aria-hidden="true">
+                    <h3 class="skill-card__title">UNREAL ENGINE</h3>
+                    <p class="skill-card__desc">Real-time 3D and virtual production scenes</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
@@ -391,37 +426,37 @@
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">TAILWIND CSS</h3>
-                    <p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+                    <h3 class="skill-card__title">REACT</h3>
+                    <p class="skill-card__desc">Building interactive, component-based UIs</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">TAILWIND CSS</h3>
-                    <p class="skill-card__desc">Utility-first styling and rapid layout building</p>
+                    <h3 class="skill-card__title">REACT</h3>
+                    <p class="skill-card__desc">Building interactive, component-based UIs</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">TYPESCRIPT</h3>
-                    <p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+                    <h3 class="skill-card__title">FIGMA</h3>
+                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">TYPESCRIPT</h3>
-                    <p class="skill-card__desc">Typed JavaScript for more reliable codebases</p>
+                    <h3 class="skill-card__title">FIGMA</h3>
+                    <p class="skill-card__desc">UI design, prototyping, and design systems</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>
                 <article class="skill-card interactive-el">
                   <div class="skill-card__face">
-                    <h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
-                    <p class="skill-card__desc">Photo editing and color grading</p>
+                    <h3 class="skill-card__title">LIGHTROOM</h3>
+                    <p class="skill-card__desc">Photo editing and colour grading</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                   <div class="skill-card__reveal" aria-hidden="true">
-                    <h3 class="skill-card__title">LIGHTROOM / CAPTURE ONE</h3>
-                    <p class="skill-card__desc">Photo editing and color grading</p>
+                    <h3 class="skill-card__title">LIGHTROOM</h3>
+                    <p class="skill-card__desc">Photo editing and colour grading</p>
                     <span class="skill-card__mark">&mdash;</span>
                   </div>
                 </article>

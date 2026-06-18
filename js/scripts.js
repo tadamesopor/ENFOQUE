@@ -474,8 +474,12 @@
   const role = document.querySelector(".hero-role");
 
   // Wrap each character of the name in its own span so we can stagger them.
+  // Both the main name and its blue tint copy are split identically (so their
+  // letters line up exactly), but only the main name's chars are animated — the
+  // tint just mirrors it.
   const chars = [];
   document.querySelectorAll(".hero-name [data-split]").forEach((line) => {
+    const isTint = line.closest(".hero-name--tint");
     const text = line.textContent;
     line.textContent = "";
     for (const ch of text) {
@@ -483,7 +487,7 @@
       span.className = "hero-name__char";
       span.textContent = ch;
       line.appendChild(span);
-      chars.push(span);
+      if (!isTint) chars.push(span);
     }
   });
 

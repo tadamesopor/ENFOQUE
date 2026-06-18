@@ -1,6 +1,26 @@
 /* ENFOQUE — shared custom styles */
 
 /* ============================================================ */
+/* HOW TO EDIT THIS SITE                                        */
+/* ------------------------------------------------------------ */
+/* 1. COLOURS live here, not in the HTML. The HTML uses names   */
+/*    like text-primary / bg-background; those names map to the */
+/*    --c-* variables below. Change a colour once here and it   */
+/*    updates everywhere, in both themes.                       */
+/*      • dark theme values  -> the ":root, .dark" block        */
+/*      • light theme values -> the ".light" block              */
+/*    Values are R G B channels, e.g. 20 19 19  (= #141313).    */
+/*                                                              */
+/* 2. To recolour ONE element (not the whole token), target its */
+/*    class. To change it in light mode only, prefix with       */
+/*    .light  — e.g.  .light .hero-name { color: #b00020; }     */
+/*    See the "Per-element colour overrides" block below.       */
+/*                                                              */
+/* 3. FONTS, FONT SIZES and SPACING live in js/tailwind.config.js */
+/*    (fontFamily / fontSize / spacing).                        */
+/* ============================================================ */
+
+/* ============================================================ */
 /* Theme tokens (channels, consumed via rgb(var(--c-x) / a)).   */
 /* Dark is the default; .light overrides them.                  */
 /* ============================================================ */
@@ -240,11 +260,11 @@ body {
   mix-blend-mode: screen;
 }
 .rgb-split-hover::before {
-  color: #ff00ff;
+  color: #000000;
   z-index: -1;
 }
 .rgb-split-hover::after {
-  color: #00ffff;
+  color: #ffffff;
   z-index: -2;
 }
 .rgb-split-hover:hover {
@@ -321,29 +341,53 @@ body {
   }
 }
 
+/* ---- Hero name: easy font + colour knobs ---------------------- */
+/* CHANGE THE HERO FONT: edit --hero-font below.                    */
+/*   • A Google font: add it to the <link> in each HTML <head>,     */
+/*     then set --hero-font: "That Font", sans-serif;               */
+/*   • Your own font file: drop a .woff2/.ttf in assets/fonts/,     */
+/*     uncomment the @font-face below, then set --hero-font to it.  */
+/*
+@font-face {
+  font-family: "Hero Custom";
+  src: url("../assets/fonts/my-hero-font.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+*/
+:root {
+  --hero-font: "Space Grotesk", sans-serif;
+}
 .hero-name {
   display: flex;
   flex-direction: column;
   width: 100%;
+  font-family: var(--hero-font);
+  /* The name overlaps the portrait. mix-blend-mode: difference inverts each
+     letter against whatever is behind it, so it's dark over the light area and
+     light over the dark photo — no outline or glow needed. */
+  color: #fff;
+  mix-blend-mode: difference;
 }
-.hero-name__line {
-  display: block;
+/* In dark mode the page behind the name is already dark, so white-on-dark works
+   without help. In light mode the blend needs a solid surface to invert against
+   (ScrollSmoother's transform cuts the name off from the page background), so we
+   give the hero its own background only here. */
+.light .hero {
+  background-color: rgb(var(--c-background));
 }
-.hero-name__line--left {
-  align-self: flex-start;
-  text-align: left;
+/* Light-mode only: a second copy of the name sits exactly on top of the first
+   (.hero-name--tint) in the sky blue, blended with multiply. Multiply leaves the
+   black letters on the cream untouched (blue x black = black) but recolours the
+   white letters over the dark photo to the blue (blue x white = blue). Hidden in
+   dark mode, where the plain white name is already correct. */
+.hero-name--tint {
+  display: none;
 }
-.hero-name__line--right {
-  align-self: flex-end;
-  text-align: right;
-}
-.hero-rule {
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin: 0.1em 0;
-  background: rgb(var(--c-outline));
-  opacity: 0.4;
+.light .hero-name--tint {
+  display: flex;
+  color: #bce2f7;
+  mix-blend-mode: multiply;
 }
 /* Each character is wrapped in a span in JS for the load-in stagger */
 .hero-name__char {
