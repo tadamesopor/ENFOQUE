@@ -440,6 +440,15 @@
   const section = pin.closest(".offwork");
   const left = pin.querySelector(".offwork__left");
 
+  // Shuffle the photos so the gallery shows a fresh order on every page load.
+  // Done before ScrollTrigger measures the track width.
+  const items = Array.from(track.querySelectorAll(".offwork__item"));
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  items.forEach((item) => track.appendChild(item));
+
   const mm = gsap.matchMedia();
   mm.add("(min-width: 768px)", () => {
     // How far the track must travel so its last photo reaches the edge.
